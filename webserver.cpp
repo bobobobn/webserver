@@ -47,6 +47,7 @@ void WebServer::eventListen(){
 void WebServer::eventLoop(){
     bool stop = false;
     int ret = 0;
+    bool time_out = false;
     while(!stop){
         ret = epoll_wait(m_epollfd, events, MAX_EVENT_NUMBER, -1);
         if(ret < 0 && errno != EINTR){            
@@ -71,14 +72,13 @@ void WebServer::eventLoop(){
             else if (events[i].events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR))
             {
                 //服务器端关闭连接，移除对应的定时器
-                // users[sockfd].close_conn(true);          
-                // util_timer *timer = users_timer[sockfd].timer;
-                // deal_timer(timer, sockfd);
+                users[sockfd].close_conn(true);          
+                m_heap->del_timer(timers+sockfd);
             }
             //处理信号
             else if ((sockfd == m_pipefd[0]) && (events[i].events & EPOLLIN))
             {
-                bool flag = dealwithsignal(stop);
+                bool flag = dealwithsignal(stop, time_out);
                 // if (false == flag)
                 //     LOG_ERROR("%s", "dealclientdata failure");
             }
@@ -93,6 +93,10 @@ void WebServer::eventLoop(){
                 dealwithwrite(sockfd);
             }
         }
+        }
+        if(time_out){
+            m_heap->tick();
+            time_out = false;
         }
     }
 }
@@ -112,11 +116,16 @@ bool WebServer::dealclientdata(){
         setNonBlocking(connfd);
         addfd(m_epollfd, connfd, true);
         users[connfd].init(connfd, user_addr, m_epollfd);
+        timers[connfd].init(m_delay, users + connfd);
+        if(m_heap->empty()){
+            alarm(m_delay);
+        }
+        m_heap->add_timer(timers+connfd);
     }
     return true;
 }
 
-bool WebServer::dealwithsignal(bool &stop_server)
+bool WebServer::dealwithsignal(bool &stop_server, bool& timeout)
 {
     int ret = 0;
     int sig;
@@ -138,7 +147,7 @@ bool WebServer::dealwithsignal(bool &stop_server)
             {
             case SIGALRM:
             {
-                // timeout = true;
+                timeout = true;
                 break;
             }
             case SIGTERM:
@@ -154,6 +163,7 @@ bool WebServer::dealwithsignal(bool &stop_server)
 
 void WebServer::dealwithread(int sockfd){
     if(users[sockfd].read_once()){
+        timers[sockfd].init(m_delay);
         m_pool->append(&users[sockfd]);
     }
     else

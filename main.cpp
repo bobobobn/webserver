@@ -9,8 +9,8 @@ int main(int argc, char *argv[])
         return 1;
     }
     int port = atoi(argv[1]);
-
-    WebServer server(port);
+    time_t delay = 15;
+    WebServer server(port, delay);
 
     //监听
     server.eventListen();

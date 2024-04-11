@@ -16,6 +16,7 @@
 #include "util.h"
 #include "threadPool.h"
 #include "httpConn.h"
+#include "heapTimer.h"
 
 const int MAX_FD = 65536;           //最大文件描述符
 const int MAX_EVENT_NUMBER = 10000; //最大事件数
@@ -23,8 +24,10 @@ const int TIMESLOT = 5;             //最小超时单位
 
 class WebServer{
 public:
-    WebServer(int port):m_port(port){
+    WebServer(int port, time_t delay):m_port(port), m_delay(delay){
     users = new http_conn[MAX_FD];
+    timers = new timer[MAX_FD];
+    m_heap = new timerHeap(MAX_FD);
 
     //root文件夹路径
     char server_path[200];
@@ -42,6 +45,8 @@ public:
         close(m_pipefd[1]);
         close(m_pipefd[0]);
         delete[] users;
+        delete[] timers;
+        delete m_heap;
         // delete[] users_timer;
         delete m_pool;
     };
@@ -52,7 +57,7 @@ public:
     void eventLoop();
     void eventListen();
     bool dealclientdata();
-    bool dealwithsignal(bool& stop_server);
+    bool dealwithsignal(bool& stop_server, bool& time_out);
     void dealwithread(int sockfd);
     void dealwithwrite(int sockfd);
 
@@ -67,6 +72,9 @@ public:
     int m_pipefd[2];
     int m_epollfd;
     http_conn *users;
+    timer* timers;
+    time_t m_delay;
+    timerHeap* m_heap;
 
     // //数据库相关
     // connection_pool *m_connPool;
