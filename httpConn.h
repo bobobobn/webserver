@@ -12,11 +12,18 @@
 #include <stdarg.h>
 #include <sys/epoll.h>
 #include <sys/uio.h>
+#include <map>
+#include <string>
+#include "lock/locker.h"
+#include <utility>
+#include "connectionPool.h"
+#include "mysql/mysql.h"
 
 class http_conn{
 public:
     static const int READ_BUFF_SIZE {2048};
     static const int WRITE_BUFF_SIZE {1024};
+    static const int FILE_LEN {200};
     int m_sockfd;
     sockaddr_in m_addr;
     char m_read_buff[READ_BUFF_SIZE];
@@ -31,6 +38,7 @@ public:
 public:
     http_conn(){};
     ~http_conn(){};
+    
     void init(int sockfd, sockaddr_in addr, int epoll_fd){
         m_sockfd = sockfd;
         m_addr = addr;
@@ -41,6 +49,7 @@ public:
 
         init();
     }
+    void initmysql_result(connectionPool *connPool);
     bool read_once();
     bool write();
     void close_conn(bool real_close);
@@ -82,7 +91,9 @@ private:
         m_iov_count = 0;
         m_bytes_to_send = 0;
         m_bytes_have_sent = 0;
-        
+        m_file_address = nullptr;
+        memset(&m_file_stat, 0, sizeof(m_file_stat));
+
         memset(m_read_buff, '\0', sizeof(m_read_buff));
         memset(m_write_buff, '\0', sizeof(m_write_buff));
     }
@@ -98,7 +109,11 @@ private:
     bool add_head(int content_length);
     bool add_content(const char* content);
     void unmap();
-    
+    char m_real_file[FILE_LEN];
+    static std::map<std::string, std::string> m_users;
+    static locker m_lock;
+    static connectionPool *conn_pool;
+    MYSQL* mysql;
 
 };
 

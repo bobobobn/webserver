@@ -28,8 +28,18 @@ void timer::init(int delay){
 }
 
 void timerHeap::percolate_down(int i){
-    while( i < cur_size - 1 ){
-        int next_index = (heap[2*i+1]->get_expire() < heap[2*i+2]->get_expire()) ? 2*i+1 : 2*i+2;
+    LOG_INFO("%s%d%s%d", "percolate_down, cur_size:",cur_size," i:", i);
+    while( i < cur_size - 1 && cur_size > 1){
+        int next_index = 0;
+        if(2*i+1 >= cur_size|| 2*i+2 >= cur_size){
+            if(2*i+1 < cur_size)
+                next_index = 2*i+1;
+        }
+        else
+        {
+            next_index = (heap[2*i+1]->get_expire() < heap[2*i+2]->get_expire()) ? 2*i+1 : 2*i+2;
+        }
+        
         if(heap[next_index]->get_expire() < heap[i]->get_expire()){
             swap(heap[next_index], heap[i]);
             i = next_index;
@@ -89,10 +99,13 @@ void timerHeap::del_timer(int timer_idx){
     }
     // delete heap[timer_idx];
     heap[timer_idx]->cb_function = nullptr;
-    heap[timer_idx] = heap[cur_size-1];
-    heap[cur_size-1] = nullptr;
     cur_size--;
-    percolate_down(timer_idx);
+    if(cur_size!=0)
+    {    
+        heap[timer_idx] = heap[cur_size];
+        heap[cur_size] = nullptr;
+        percolate_down(timer_idx);
+    }
 }
 
 bool timerHeap::empty() const{
@@ -113,7 +126,7 @@ void timerHeap::tick(){
     timer* root = top();
     if(!root)
         return;
-    if(time(NULL) >= root->get_expire()){
+    while((root=top())&& (time(NULL) >= root->get_expire())){
         root->call_cb_fun();
         pop();
         if(!empty())

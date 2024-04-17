@@ -17,6 +17,11 @@
 #include "threadPool.h"
 #include "httpConn.h"
 #include "heapTimer.h"
+#include "log.h"
+#include "connectionPool.h"
+#include "CGImysql/sql_connection_pool.h"
+#include <string>
+using std::string;
 
 const int MAX_FD = 65536;           //最大文件描述符
 const int MAX_EVENT_NUMBER = 10000; //最大事件数
@@ -24,11 +29,16 @@ const int TIMESLOT = 5;             //最小超时单位
 
 class WebServer{
 public:
-    WebServer(int port, time_t delay):m_port(port), m_delay(delay){
+    WebServer(int port, time_t delay, string user, string password, string dbName):m_port(port), m_delay(delay){
     users = new http_conn[MAX_FD];
     timers = new timer[MAX_FD];
     m_heap = new timerHeap(MAX_FD);
+    Log::get_instance()->init("weblog", 8192, 10000, 1000);
+    Log::get_instance()->write_log(0, "%s", "server start");
 
+    m_connPool = connectionPool::get_instance();
+    connectionPool::get_instance()->init("localhost", user, password, "websvDB", 3306, 100);
+    users->initmysql_result(m_connPool);
     //root文件夹路径
     char server_path[200];
     getcwd(server_path, 200);
@@ -38,6 +48,7 @@ public:
     strcat(m_root, root);
     m_pool = new threadPool<http_conn>(8, 10000);
     utils.sig_pipe = m_pipefd;
+    m_OPT_LINGER = 1;
     }
     ~WebServer(){
         close(m_epollfd);
@@ -46,6 +57,7 @@ public:
         close(m_pipefd[0]);
         delete[] users;
         delete[] timers;
+        delete[] m_root;
         delete m_heap;
         // delete[] users_timer;
         delete m_pool;
@@ -60,6 +72,8 @@ public:
     bool dealwithsignal(bool& stop_server, bool& time_out);
     void dealwithread(int sockfd);
     void dealwithwrite(int sockfd);
+    void sql_pool();
+    void thread_pool();
 
 public:
     //基础
@@ -77,7 +91,7 @@ public:
     timerHeap* m_heap;
 
     // //数据库相关
-    // connection_pool *m_connPool;
+    connectionPool *m_connPool;
     // string m_user;         //登陆数据库用户名
     // string m_passWord;     //登陆数据库密码
     // string m_databaseName; //使用数据库名

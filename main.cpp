@@ -1,5 +1,7 @@
 #include "webserver.h"
 #include <stdlib.h>
+#include <string>
+using std::string;
 
 
 int main(int argc, char *argv[])
@@ -9,9 +11,11 @@ int main(int argc, char *argv[])
         return 1;
     }
     int port = atoi(argv[1]);
-    time_t delay = 15;
-    WebServer server(port, delay);
-
+    time_t delay = 5;
+    string user = "root";
+    string passwd = "root";
+    string databasename = "yourdb";
+    WebServer server(port, delay, user, passwd, databasename);
     //监听
     server.eventListen();
 

@@ -141,7 +141,6 @@ public:
                     my_tm.tm_year + 1900, my_tm.tm_mon + 1, my_tm.tm_mday,
                     my_tm.tm_hour, my_tm.tm_min, my_tm.tm_sec, now.tv_usec, s);
         int m = vsnprintf(m_buf+n, m_log_buff_size-1-n, format, valist);
-        printf("%s\n",va_arg(valist,char*));
         m_buf[m+n] = '\n';
         m_buf[m+n+1] = '\0';
         str = m_buf;

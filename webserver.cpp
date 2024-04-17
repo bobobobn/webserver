@@ -1,7 +1,10 @@
 #include "webserver.h"
+#include "log.h"
 
 
-
+void WebServer::thread_pool(){
+    m_pool = new threadPool<http_conn>(8, 10000);
+}
 void WebServer::eventListen(){
     m_listenfd = socket(PF_INET, SOCK_STREAM, 0);
     assert(m_listenfd >= 0);
@@ -51,7 +54,7 @@ void WebServer::eventLoop(){
     while(!stop){
         ret = epoll_wait(m_epollfd, events, MAX_EVENT_NUMBER, -1);
         if(ret < 0 && errno != EINTR){            
-            // LOG_ERROR("%s", "epoll failure");
+            LOG_ERROR("%s", "epoll failure");
             printf("epollfd:%d\n", m_epollfd);
             printf("err:%d\n", errno);
             printf("epoll failure\n");
@@ -72,6 +75,7 @@ void WebServer::eventLoop(){
             else if (events[i].events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR))
             {
                 //服务器端关闭连接，移除对应的定时器
+
                 users[sockfd].close_conn(true);          
                 m_heap->del_timer(timers+sockfd);
             }
@@ -79,8 +83,8 @@ void WebServer::eventLoop(){
             else if ((sockfd == m_pipefd[0]) && (events[i].events & EPOLLIN))
             {
                 bool flag = dealwithsignal(stop, time_out);
-                // if (false == flag)
-                //     LOG_ERROR("%s", "dealclientdata failure");
+                if (false == flag)
+                    LOG_ERROR("%s", "dealclientdata failure");
             }
             //处理客户连接上接收到的数据
             else if (events[i].events & EPOLLIN)
@@ -111,8 +115,10 @@ bool WebServer::dealclientdata(){
         }
         if(http_conn::m_user_count >= MAX_FD){
             close(connfd);
+            LOG_INFO("%s", "out of user resourse, disconnected");
             return false;
         }
+        LOG_INFO("%s", "got connection of user fd:");
         setNonBlocking(connfd);
         addfd(m_epollfd, connfd, true);
         users[connfd].init(connfd, user_addr, m_epollfd);
@@ -173,3 +179,4 @@ void WebServer::dealwithread(int sockfd){
 void WebServer::dealwithwrite(int sockfd){
     users[sockfd].write();
 }
+

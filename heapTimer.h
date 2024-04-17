@@ -6,11 +6,12 @@
 
 class timer{
 public:
-    timer(){}
+    timer(){m_expire = 0;user_data=nullptr;}
     void init(int delay, http_conn* user);
     void init(int delay);
-    ~timer(){};
-    time_t get_expire(){return m_expire;};
+    ~timer(){}
+    time_t get_expire(){
+        return m_expire;};
     void (*cb_function)(timer*);
     static void cb_fun(timer*);
     void call_cb_fun(){
