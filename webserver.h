@@ -19,7 +19,6 @@
 #include "heapTimer.h"
 #include "log.h"
 #include "connectionPool.h"
-#include "CGImysql/sql_connection_pool.h"
 #include <string>
 using std::string;
 
