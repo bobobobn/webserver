@@ -75,6 +75,7 @@ public:
     void thread_pool();
 
 public:
+    connectionPool *m_connPool;
     //基础
     int m_port;
     char *m_root;
@@ -90,7 +91,6 @@ public:
     timerHeap* m_heap;
 
     // //数据库相关
-    connectionPool *m_connPool;
     // string m_user;         //登陆数据库用户名
     // string m_passWord;     //登陆数据库密码
     // string m_databaseName; //使用数据库名
