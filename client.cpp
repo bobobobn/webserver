@@ -52,12 +52,13 @@ int main(int argc, char** argv){
             break;
         }
         if(fds[0].revents & POLLIN){
-            // memset(read_buf, '\0', sizeof(read_buf));
-            // read(0, read_buf, BUF_SIZE);
-            // send(sock_fd, read_buf, strlen(read_buf), 0);
+            memset(read_buf, '\0', sizeof(read_buf));
+            read(0, read_buf, BUF_SIZE);
+            printf("%s", read_buf);
+            send(sock_fd, read_buf, strlen(read_buf), 0);
             // fds[0].revents &= ~POLLIN;
-            ret = splice(0, NULL, pipefd[0], NULL, 32768, SPLICE_F_MOVE | SPLICE_F_MORE);
-            ret = splice(pipefd[1], NULL, sock_fd, NULL, 32768, SPLICE_F_MOVE | SPLICE_F_MORE);
+            // ret = splice(0, NULL, pipefd[0], NULL, 32768, SPLICE_F_MOVE | SPLICE_F_MORE);
+            // ret = splice(pipefd[1], NULL, sock_fd, NULL, 32768, SPLICE_F_MOVE | SPLICE_F_MORE);
         }
         else if(fds[1].revents & POLLRDHUP){
             printf("server closed the connection\n");
