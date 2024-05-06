@@ -39,15 +39,19 @@ int setNonBlocking(int fd)
 }
 
 //将内核事件表注册读事件，ET模式，选择开启EPOLLONESHOT
-void addfd(int epollfd, int fd, bool one_shot)
+void addfd(int epollfd, int fd, bool one_shot, bool ET = true)
 {
     epoll_event event;
     event.data.fd = fd;
-    if(one_shot){
-        event.events = EPOLLIN | EPOLLET | EPOLLRDHUP | EPOLLERR | EPOLLONESHOT;
-    }
-    else{
+    if(ET){
         event.events = EPOLLIN | EPOLLET | EPOLLRDHUP | EPOLLERR;
+    }
+    else
+    {
+        event.events = EPOLLIN | EPOLLRDHUP | EPOLLERR;
+    }
+    if(one_shot){
+        event.events |= EPOLLONESHOT;
     }
     epoll_ctl(epollfd, EPOLL_CTL_ADD, fd, &event);
     setNonBlocking(fd);

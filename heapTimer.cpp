@@ -29,6 +29,9 @@ void timer::init(int delay){
 
 void timerHeap::percolate_down(int i){
     LOG_INFO("%s%d%s%d", "percolate_down, cur_size:",cur_size," i:", i);
+    if(cur_size==1){
+        printf("stop here\n");
+    }
     while( i < cur_size - 1 && cur_size > 1){
         int next_index = 0;
         if(2*i+1 >= cur_size|| 2*i+2 >= cur_size){
@@ -129,8 +132,8 @@ void timerHeap::tick(){
     while((root=top())&& (time(NULL) >= root->get_expire())){
         root->call_cb_fun();
         pop();
-        if(!empty())
-            alarm(top()->get_expire() - time(NULL));
     }
+    if(!empty())
+        alarm(top()->get_expire() - time(NULL));
 
 }

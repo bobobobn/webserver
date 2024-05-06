@@ -25,7 +25,7 @@ public:
 int setNonBlocking(int fd);
 
 //将内核事件表注册读事件，ET模式，选择开启EPOLLONESHOT
-void addfd(int epollfd, int fd, bool one_shot);
+void addfd(int epollfd, int fd, bool one_shot, bool ET);
 
 //从内核时间表删除描述符
 void removefd(int epollfd, int fd);

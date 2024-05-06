@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
         return 1;
     }
     int port = atoi(argv[1]);
-    time_t delay = 5;
+    time_t delay = 15;
     string user = "root";
     string passwd = "root";
     string databasename = "yourdb";

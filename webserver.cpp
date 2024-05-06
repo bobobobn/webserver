@@ -39,7 +39,7 @@ void WebServer::eventListen(){
     assert(m_epollfd != -1);
     ret = socketpair(PF_UNIX, SOCK_STREAM, 0, m_pipefd);
     setNonBlocking(m_pipefd[1]);
-    addfd(m_epollfd, m_listenfd, false);
+    addfd(m_epollfd, m_listenfd, false, true);
     utils.add_fd(m_epollfd, m_pipefd[0], false);
     utils.add_sig(SIGPIPE, SIG_IGN);
     utils.add_sig(SIGTERM, Utils::sig_handle);
@@ -65,9 +65,9 @@ void WebServer::eventLoop(){
             int sockfd = events[i].data.fd;
 
             //处理新到的客户连接
-            printf("get a call\n");
             if (sockfd == m_listenfd)
             {
+                LOG_INFO("%s","get a conn request\n");
                 bool flag = dealclientdata();
                 if (false == flag)
                     continue;
@@ -75,13 +75,14 @@ void WebServer::eventLoop(){
             else if (events[i].events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR))
             {
                 //服务器端关闭连接，移除对应的定时器
-
+                LOG_INFO("%s","client disconn\n");
                 users[sockfd].close_conn(true);          
                 m_heap->del_timer(timers+sockfd);
             }
             //处理信号
             else if ((sockfd == m_pipefd[0]) && (events[i].events & EPOLLIN))
             {
+                LOG_INFO("%s","get a signal\n");
                 bool flag = dealwithsignal(stop, time_out);
                 if (false == flag)
                     LOG_ERROR("%s", "dealclientdata failure");
@@ -89,11 +90,12 @@ void WebServer::eventLoop(){
             //处理客户连接上接收到的数据
             else if (events[i].events & EPOLLIN)
             {   
-                printf("get client request\n");
+                LOG_INFO("%s","get client request\n");
                 dealwithread(sockfd);
             }
             else if (events[i].events & EPOLLOUT)
             {
+                LOG_INFO("%s","output data to client\n");
                 dealwithwrite(sockfd);
             }
         }
@@ -111,8 +113,10 @@ bool WebServer::dealclientdata(){
     while(1){
         int connfd = accept(m_listenfd, (sockaddr*) &user_addr, &len);
         if(connfd < 0){
+            LOG_ERROR("%s:errno is:%d", "accept error", errno);
             break;
         }
+        LOG_INFO("%s%d","m_user_count:",http_conn::m_user_count);
         if(http_conn::m_user_count >= MAX_FD){
             close(connfd);
             LOG_INFO("%s", "out of user resourse, disconnected");
@@ -120,7 +124,7 @@ bool WebServer::dealclientdata(){
         }
         LOG_INFO("%s", "got connection of user fd:");
         setNonBlocking(connfd);
-        addfd(m_epollfd, connfd, true);
+        addfd(m_epollfd, connfd, true, true);
         users[connfd].init(connfd, user_addr, m_epollfd);
         timers[connfd].init(m_delay, users + connfd);
         if(m_heap->empty()){
@@ -153,11 +157,13 @@ bool WebServer::dealwithsignal(bool &stop_server, bool& timeout)
             {
             case SIGALRM:
             {
+                LOG_INFO("%s","sigalarm");
                 timeout = true;
                 break;
             }
             case SIGTERM:
             {
+                LOG_INFO("%s","sigterm");
                 stop_server = true;
                 break;
             }
@@ -177,6 +183,9 @@ void WebServer::dealwithread(int sockfd){
 }
 
 void WebServer::dealwithwrite(int sockfd){
-    users[sockfd].write();
+    if(!users[sockfd].write()){
+        users[sockfd].close_conn(true);
+        m_heap->del_timer(timers+sockfd);
+    }
 }
 

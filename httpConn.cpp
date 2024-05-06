@@ -456,38 +456,49 @@ bool http_conn::write(){
 
     int temp = 0;
     while(1){
-        temp = writev(m_sockfd, m_iov, m_iov_count);
-        if(temp > 0){
-            m_bytes_have_sent += temp;
-        }
-        else if(temp < 0){
-            if(errno == EAGAIN){
-                if(m_bytes_have_sent > m_write_idx){
-                    m_iov[0].iov_len = 0;
-                    m_iov[1].iov_base += m_bytes_have_sent - m_write_idx;
-                    m_iov[1].iov_len -= m_bytes_have_sent - m_write_idx;
-                }
-                else{
-                    m_iov[0].iov_base += m_bytes_have_sent;
-                    m_iov[0].iov_len -= m_bytes_have_sent;
-                }
+                temp = writev(m_sockfd, m_iov, m_iov_count);
+
+        if (temp < 0)
+        {
+            if (errno == EAGAIN)
+            {
                 modfd(m_epoll_fd, m_sockfd, EPOLLOUT);
                 return true;
             }
             unmap();
             return false;
         }
-        if(m_bytes_have_sent >= m_bytes_to_send){
+
+        m_bytes_have_sent += temp;
+        m_bytes_to_send -= temp;
+        if (m_bytes_have_sent >= m_iov[0].iov_len)
+        {
+            m_iov[0].iov_len = 0;
+            m_iov[1].iov_base = m_file_address + (m_bytes_have_sent - m_write_idx);
+            m_iov[1].iov_len = m_bytes_to_send;
+        }
+        else
+        {
+            m_iov[0].iov_base = m_write_buff + m_bytes_have_sent;
+            m_iov[0].iov_len = m_iov[0].iov_len - m_bytes_have_sent;
+        }
+
+        if (m_bytes_to_send <= 0)
+        {
             unmap();
-            modfd(m_epoll_fd,m_sockfd,EPOLLIN);
-            if(m_linger){
+            modfd(m_epoll_fd, m_sockfd, EPOLLIN);
+
+            if (m_linger)
+            {
                 init();
                 return true;
             }
-            else{
+            else
+            {
                 return false;
             }
         }
+    
     }
 }
 
