@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下单系统</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>下单系统</h1>
+
+    <!-- 商户选择 -->
+    <div>
+        <label for="merchantSelect">选择商户:</label>
+        <select id="merchantSelect">
+            <!-- 动态加载商户列表 -->
+        </select>
+        <button id="loadMerchant">加载商户店铺商品</button>
+        <button id="refreshMerchant">刷新</button>
+    </div>
+
+    <!-- 商品管理部分 -->
+    <div id="productManagement" style="display: none;">
+
+        <!-- 商品列表 -->
+        <h2>商品列表</h2>
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th>选择</th>
+                    <th>ID</th>
+                    <th>商品名称</th>
+                    <th>数量</th>
+                    <th>下单数量</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 商品数据行将动态插入 -->
+            </tbody>
+        </table>
+
+        <!-- 收货地址输入 -->
+        <div>
+            <label for="deliveryAddress">收货地址:</label>
+            <input type="text" id="deliveryAddress" placeholder="请输入收货地址">
+        </div>
+        <button id="submitOrder">提交订单</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const refreshMerchant = document.getElementById('refreshMerchant');
+            const merchantSelect = document.getElementById('merchantSelect');
+            const loadMerchantButton = document.getElementById('loadMerchant');
+            const productManagement = document.getElementById('productManagement');
+            const productTable = document.getElementById('productTable').getElementsByTagName('tbody')[0];
+            const submitOrderButton = document.getElementById('submitOrder');
+            const deliveryAddressInput = document.getElementById('deliveryAddress');
+
+            let selectedMerchant = null;
+            let products = [];
+            let merchant_of_products = null;
+
+            // 加载商户列表
+            function loadMerchants() {
+                fetch(`/api/merchants/name`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        merchants = data.merchants;
+                        merchantSelect.innerHTML = '';
+                        merchants.forEach(merchant => {
+                            const option = document.createElement('option');
+                            option.value = merchant.name;
+                            option.textContent = merchant.name;
+                            merchantSelect.appendChild(option);
+                        });
+                        merchant_of_products = merchants[0].name;
+                        reloadProducts(); 
+                    } else {
+                        alert('加载商户失败，请重试。');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('加载商户失败，请重试。');
+                });
+            }
+
+            // 加载商户列表事件绑定
+            refreshMerchant.addEventListener('click', loadMerchants);
+
+            // 加载商户店铺商品
+            loadMerchantButton.addEventListener('click', function () {
+                const merchantName = merchantSelect.value;
+                if (merchantName) {
+                    fetch(`/api/merchants/products`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ merchantName: merchantName })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            products = data.products;
+                            loadProducts();
+                            productManagement.style.display = 'block';
+                            merchant_of_products = merchantName;
+                        } else {
+                            alert('加载商品失败，请重试。');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('加载商品失败，请重试。');
+                    });
+                }
+            });
+
+            // 加载商品列表
+            function loadProducts() {
+                productTable.innerHTML = '';
+                products.forEach(product => {
+                    const row = productTable.insertRow();
+                    const selectCell = row.insertCell(0);
+                    const idCell = row.insertCell(1);
+                    const nameCell = row.insertCell(2);
+                    const quantityCell = row.insertCell(3);
+                    const orderQuantityCell = row.insertCell(4);
+
+                    selectCell.innerHTML = `<input type="checkbox" class="select-product" data-id="${product.id}">`;
+                    idCell.textContent = product.id;
+                    nameCell.textContent = product.name;
+                    quantityCell.textContent = product.quantity;
+                    orderQuantityCell.innerHTML = `<input type="number" class="order-quantity" data-id="${product.id}" value="0" min="0" max="${product.quantity}">`;
+                });
+            }
+            loadMerchants();
+            // 刷新商品列表
+            function reloadProducts () {
+                if (merchant_of_products) {
+                    // 发送商户名给服务器查询商品信息
+                    fetch(`/api/merchants/products`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ merchantName: merchant_of_products })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            products = data.products;
+                            loadProducts();
+                            productManagement.style.display = 'block';
+                        } else {
+                            alert('加载商品失败，请重试。');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('加载商品失败，请重试。');
+                    });
+                }
+            }
+            // 提交订单
+            submitOrderButton.addEventListener('click', function () {
+                const selectedProducts = [];
+                document.querySelectorAll('.select-product:checked').forEach(checkbox => {
+                    const productId = checkbox.getAttribute('data-id');
+                    const orderQuantityInput = document.querySelector(`.order-quantity[data-id="${productId}"]`);
+                    const orderQuantity = parseInt(orderQuantityInput.value, 10);
+
+                    if (orderQuantity > 0) {
+                        selectedProducts.push({
+                            id: String(productId),
+                            quantity: String(orderQuantity)
+                        });
+                    }
+                });
+
+                const deliveryAddress = deliveryAddressInput.value.trim();
+
+                if (selectedProducts.length > 0 && deliveryAddress) {
+                    fetch(`/api/orders/submit`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            merchantName: merchant_of_products,
+                            products: selectedProducts,
+                            deliveryAddress: deliveryAddress
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('订单提交成功！');
+                            // 清空购物车和下单数量
+                            document.querySelectorAll('.select-product').forEach(checkbox => {
+                                checkbox.checked = false;
+                            });
+                            document.querySelectorAll('.order-quantity').forEach(input => {
+                                input.value = 0;
+                            });
+                            deliveryAddressInput.value = '';
+                            // 刷新商品列表
+                            reloadProducts();
+                        } else {
+                            alert('订单提交失败，请重试。');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('订单提交失败，请重试。');
+                    });
+                } else {
+                    alert('请勾选商品并填写收货地址。');
+                }
+            });
+
+            
+        });
+    </script>
+</body>
+</html>

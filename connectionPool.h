@@ -51,15 +51,20 @@ private:
 class connectionRAII{
 
 public:
-	connectionRAII(MYSQL **con, connectionPool *connPool){
-        *con = connPool->getConn();	
-        conRAII = *con;
-        poolRAII = connPool;
+	connectionRAII(){
+        poolRAII = connectionPool::get_instance();
+        conRAII = poolRAII->getConn();
     }
 	~connectionRAII(){
         poolRAII->releaseConn(conRAII);
     }
-	
+	MYSQL& operator*(){
+        return *conRAII;
+    }
+
+	MYSQL* operator->(){
+        return conRAII;
+    }
 private:
 	MYSQL *conRAII;
 	connectionPool *poolRAII;

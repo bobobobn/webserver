@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商户库存商品管理</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>商户库存商品管理</h1>
+
+    <!-- 商户选择 -->
+    <div>
+        <label for="merchantSelect">选择商户:</label>
+        <select id="merchantSelect">
+            <!-- 动态加载商户列表 -->
+        </select>
+        <button id="loadMerchant">加载商户店铺商品</button>
+        <button id="refreshMerchant">REFRESH</button>
+    </div>
+
+    <!-- 商品管理部分 -->
+    <div id="productManagement" style="display: none;">
+        <!-- 添加商品表单 -->
+        <form id="addProductForm">
+            <h2>添加商品</h2>
+            <label for="productName">商品名称:</label>
+            <input type="text" id="productName" name="productName" required>
+            <label for="productQuantity">数量:</label>
+            <input type="number" id="productQuantity" name="productQuantity" required>
+            <button type="submit">添加</button>
+        </form>
+
+        <!-- 商品列表 -->
+        <h2>商品列表</h2>
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>商品名称</th>
+                    <th>数量</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 商品数据行将动态插入 -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const refreshMerchant = document.getElementById('refreshMerchant');
+            const merchantSelect = document.getElementById('merchantSelect');
+            const loadMerchantButton = document.getElementById('loadMerchant');
+            const productManagement = document.getElementById('productManagement');
+            const addProductForm = document.getElementById('addProductForm');
+            const productTable = document.getElementById('productTable').getElementsByTagName('tbody')[0];
+
+            let selectedMerchant = null;
+            let products = [];
+            let merchant_of_products = null;
+
+            // 模拟商户数据
+            let merchants = [
+            ];
+            fetch(`/api/merchants/name`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        merchants = data.merchants;
+                        loadMerchants();
+                    }
+                })
+
+
+
+            // 加载商户店铺
+            refreshMerchant.addEventListener('click', function () {
+                // 发送商户名给服务器查询商品信息
+                fetch(`/api/merchants/name`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        merchants = [];
+                        merchants = data.merchants;
+                        loadMerchants();
+                    } else {
+                        alert('data not seccess 加载商品失败，请重试。');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('加载商品失败，请重试。');
+                });
+            });
+
+            // 加载商户列表
+            function loadMerchants() {
+                merchantSelect.innerHTML = '';
+                merchants.forEach(merchant => {
+                    const option = document.createElement('option');
+                    option.value = merchant.name;
+                    option.textContent = merchant.name;
+                    
+                    merchantSelect.appendChild(option);
+                });
+                merchant_of_products = merchants[0].name;
+                reloadProducts();
+            }
+
+            // 加载商户店铺商品
+            loadMerchantButton.addEventListener('click', function () {
+                const merchantName = merchantSelect.value;
+                if (merchantName) {
+                    // 发送商户名给服务器查询商品信息
+                    fetch(`/api/merchants/products`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ merchantName: merchantName })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            products = data.products;
+                            loadProducts();
+                            productManagement.style.display = 'block';
+                            merchant_of_products = merchantName;
+                        } else {
+                            alert('加载商品失败，请重试。');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('加载商品失败，请重试。');
+                    });
+                }
+            });
+
+            // 加载商品列表
+            function loadProducts() {
+                productTable.innerHTML = '';
+                products.forEach(product => {
+                    const row = productTable.insertRow();
+                    row.insertCell(0).textContent = product.id;
+                    row.insertCell(1).textContent = product.name;
+                    row.insertCell(2).textContent = product.quantity;
+                    const actionsCell = row.insertCell(3);
+                    actionsCell.innerHTML = `<button onclick="editProduct(${product.id})">编辑</button> 
+                                             <button onclick="deleteProduct(${product.id})">删除</button>`;
+                });
+            }
+            // 刷新商品列表
+            function reloadProducts () {
+                if (merchant_of_products) {
+                    // 发送商户名给服务器查询商品信息
+                    fetch(`/api/merchants/products`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ merchantName: merchant_of_products })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            products = data.products;
+                            loadProducts();
+                            productManagement.style.display = 'block';
+                        } else {
+                            alert('加载商品失败，请重试。');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('加载商品失败，请重试。');
+                    });
+                }
+            }
+            // 添加商品
+            addProductForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const newProduct = {
+                    name: addProductForm.productName.value,
+                    quantity: addProductForm.productQuantity.value
+                };
+                fetch(`/api/merchants/products/add`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ merchantName : merchant_of_products, product : newProduct })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log('添加成功');
+                        newProduct.id = data.productId;
+                        products.push(newProduct);
+                        loadProducts();
+                        addProductForm.reset();
+                    } else {
+                        alert('添加失败，请重试。');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('添加失败，请重试。');
+                });
+            });
+
+            // 编辑产品函数
+            window.editProduct = function (id) {
+                const product = products.find(p => p.id == id);
+                if (product) {
+                    const newName = prompt('修改商品名称:', product.name);
+                    const newQuantity = prompt('修改数量:', product.quantity);
+                    if (newName !== null && newQuantity !== null) {
+                        fetch(`/api/merchants/products/edit`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ merchantName : merchant_of_products, productId : String(id), newName : newName, newQuantity : newQuantity })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                console.log('修改成功');
+                                product.name = newName;
+                                product.quantity = parseInt(newQuantity, 10);
+                                loadProducts();
+                            } else {
+                                alert('修改失败，请重试。');
+                            }
+                        })
+                    }
+                } else {
+                    console.error('Product not found');
+                }
+            };
+
+            // 删除产品函数
+            window.deleteProduct = function (id) {
+                const product = products.find(p => p.id == id);
+                if (product) {
+                    fetch(`/api/merchants/products/delete`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ merchantName : merchant_of_products, productId : String(id) })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            console.log('删除成功');
+                            const index = products.findIndex(p => p.id == id);
+                            products.splice(index, 1);
+                            loadProducts();
+                        } else {
+                            alert('删除失败，请重试。');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('删除失败，请重试。');
+                    });
+                } else {
+                    console.error('Product not found');
+                }
+            };            
+        });
+        
+    </script>
+</body>
+</html>

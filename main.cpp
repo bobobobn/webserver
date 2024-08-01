@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     time_t delay = 15;
     string user = "root";
     string passwd = "root";
-    string databasename = "yourdb";
+    string databasename = "websvDB";
     WebServer server(port, delay, user, passwd, databasename);
     //监听
     server.eventListen();
