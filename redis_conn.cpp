@@ -25,3 +25,12 @@ RedisConn::ReplyPtr RedisConn::send_command(const char* cmd) {
     }
     return ReplyPtr(reply, freeReplyObject);
 }
+
+RedisConn::ReplyPtr RedisConn::send_command(const char* format, va_list ap) {
+    redisReply* reply = (redisReply*)redisvCommand(redis_context, format, ap);
+    if (reply == NULL) {
+        LOG_ERROR("redisCommand error: %s", redis_context->errstr);
+        return {nullptr, nullptr};
+    }
+    return ReplyPtr(reply, freeReplyObject);
+}

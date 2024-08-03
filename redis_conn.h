@@ -9,6 +9,7 @@ public:
     RedisConn(const char* ip, int port, const char* passwd);
     ~RedisConn();
     ReplyPtr send_command(const char* cmd);
+    ReplyPtr send_command(const char* format, va_list ap);
 
 private:
     redisContext* redis_context;

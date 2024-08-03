@@ -35,10 +35,7 @@ public:
     RedisConn::ReplyPtr send_command(const char* format, ...) {
         va_list args;
         va_start(args, format);
-        char cmd[1024];
-        int length = vsnprintf(cmd, sizeof(cmd), format, args);
-        va_end(args);
-        auto ret = conn_->send_command(cmd);
+        auto ret = conn_->send_command(format, args);
         va_end(args);
         return ret;
     }
