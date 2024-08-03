@@ -15,7 +15,10 @@ int main(int argc, char *argv[])
     string user = "root";
     string passwd = "root";
     string databasename = "websvDB";
-    WebServer server(port, delay, user, passwd, databasename);
+    string redisIp = "127.0.0.1";
+    int redisPort = 6379;
+    string redisPasswd = "";
+    WebServer server(port, delay, user, passwd, databasename, redisIp, redisPort, redisPasswd);
     //监听
     server.eventListen();
 

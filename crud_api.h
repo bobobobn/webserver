@@ -5,59 +5,81 @@
 #include <nlohmann/json.hpp>
 #include "connectionPool.h"
 #include "log.h"
+#include "redis_pool.h"
 
 namespace crud_api {
     using ApiFun = std::function<std::string(char*, int)>;
     enum class Status{ Failed = 0, Success = 1 };
     std::string get_all_merchants_name(char* content, int content_size){
-        auto mysql = connectionRAII();
-        mysql_query(&*mysql, "SELECT id, name FROM merchant_name");
-        LOG_ERROR("SELECT error:%s\n", mysql_error(&*mysql));
-        MYSQL_RES* res = mysql_store_result(&*mysql);
-        int num_rows = mysql_num_rows(res);
-        MYSQL_ROW row;
-        nlohmann::json result;        
-        result["success"] = Status::Success;
-        nlohmann::json json_data = nlohmann::json::array();
-        while ((row = mysql_fetch_row(res))) {
-            std::string name = row[1];
-            nlohmann::json merchant = { {"id", std::string(row[0])}, {"name", name} };
-            json_data.push_back(merchant);
+        // 先在redis中查询
+        RedisConnRAII redis_conn;
+        const char* redis_key = "all_merchants_name";
+        auto reply = redis_conn.send_command("GET %s", redis_key);
+        // 若redis中没有，则从数据库中查询，并将结果存入redis
+        if(reply == nullptr || reply->type == REDIS_REPLY_NIL){  
+            auto mysql = connectionRAII();
+            mysql_query(&*mysql, "SELECT id, name FROM merchant_name");
+            LOG_ERROR("SELECT error:%s\n", mysql_error(&*mysql));
+            MYSQL_RES* res = mysql_store_result(&*mysql);
+            int num_rows = mysql_num_rows(res);
+            MYSQL_ROW row;
+            nlohmann::json result;        
+            result["success"] = Status::Success;
+            nlohmann::json json_data = nlohmann::json::array();
+            while ((row = mysql_fetch_row(res))) {
+                std::string name = row[1];
+                nlohmann::json merchant = { {"id", std::string(row[0])}, {"name", name} };
+                json_data.push_back(merchant);
+            }
+            mysql_free_result(res);
+            result["merchants"] = json_data;
+            std::string result_str = result.dump();
+            redis_conn.send_command("SET %s %s", redis_key, result_str.c_str());
+            return result_str;
         }
-        mysql_free_result(res);
-        result["merchants"] = json_data;
-        std::string result_str = result.dump();
-        return result_str;
+        else{
+            return reply->str;
+        }
     }
     std::string get_merchant_products(char* content, int content_size){
         nlohmann::json json_data = nlohmann::json::parse(content);
         std::string merchant_name = json_data["merchantName"];
         printf("merchant_name: %s\n", merchant_name.c_str());
-        // TODO: get products of the merchant from database
-        auto mysql = connectionRAII();
-        mysql_query(&*mysql, 
-        ("SELECT product_id, product_name, product_quantity FROM merchant_products \
-         INNER JOIN merchant_name ON merchant_products.merchant_id = merchant_name.id \
-         WHERE merchant_name.name = '"+merchant_name+"'").c_str());
-        const char* query_info = mysql_error(&*mysql);
-        LOG_ERROR("SELECT error:%s\n", query_info);
-        MYSQL_RES* res = mysql_store_result(&*mysql);
-        int num_rows = mysql_num_rows(res);
-        MYSQL_ROW row;
-        nlohmann::json result;
-        result["success"] = Status::Success;
-        nlohmann::json json_products = nlohmann::json::array();
-        while ((row = mysql_fetch_row(res))) {
-            std::string product_id = row[0];
-            std::string product_name = row[1];
-            int product_quantity = std::stoi(row[2]);
-            nlohmann::json product = { {"id", product_id}, {"name", product_name}, {"quantity", product_quantity} };
-            json_products.push_back(product);
+        // 先在redis中查询
+        RedisConnRAII redis_conn;
+        std::string redis_key = merchant_name + ":merchant_products";
+        auto reply = redis_conn.send_command("GET %s", redis_key.c_str());
+        // 若redis中没有，则从数据库中查询，并将结果存入redis
+        if(reply == nullptr || reply->type == REDIS_REPLY_NIL){  
+            auto mysql = connectionRAII();
+            mysql_query(&*mysql, 
+            ("SELECT product_id, product_name, product_quantity FROM merchant_products \
+            INNER JOIN merchant_name ON merchant_products.merchant_id = merchant_name.id \
+            WHERE merchant_name.name = '"+merchant_name+"'").c_str());
+            const char* query_info = mysql_error(&*mysql);
+            LOG_ERROR("SELECT error:%s\n", query_info);
+            MYSQL_RES* res = mysql_store_result(&*mysql);
+            int num_rows = mysql_num_rows(res);
+            MYSQL_ROW row;
+            nlohmann::json result;
+            result["success"] = Status::Success;
+            nlohmann::json json_products = nlohmann::json::array();
+            while ((row = mysql_fetch_row(res))) {
+                std::string product_id = row[0];
+                std::string product_name = row[1];
+                int product_quantity = std::stoi(row[2]);
+                nlohmann::json product = { {"id", product_id}, {"name", product_name}, {"quantity", product_quantity} };
+                json_products.push_back(product);
+            }
+            mysql_free_result(res);
+            result["products"] = json_products;
+            std::string result_str = result.dump();
+            redis_conn.send_command("SET %s %s", redis_key.c_str(), result_str.c_str());
+            return result_str;
         }
-        mysql_free_result(res);
-        result["products"] = json_products;
-        std::string result_str = result.dump();
-        return result_str;
+        else{
+            return reply->str;
+        }
     }
 
     std::string edit_product(char* content, int content_size){
@@ -78,6 +100,10 @@ namespace crud_api {
         nlohmann::json result;
         if(strlen(query_info) == 0) {
             result["success"] = Status::Success;
+            // 删除redis缓存
+            RedisConnRAII redis_conn;
+            std::string redis_key = merchantName + ":merchant_products";
+            redis_conn.send_command("DEL %s", redis_key);
         }
         else{
             result["success"] = Status::Failed;
@@ -100,6 +126,10 @@ namespace crud_api {
         nlohmann::json result;
         if(strlen(query_info) == 0) {
             result["success"] = Status::Success;
+            // 删除redis缓存
+            RedisConnRAII redis_conn;
+            std::string redis_key = merchantName + ":merchant_products";
+            redis_conn.send_command("DEL %s", redis_key.c_str());
         }
         else{
             result["success"] = Status::Failed;
@@ -127,6 +157,10 @@ namespace crud_api {
         if(strlen(query_info) == 0) {
             result["success"] = Status::Success;
             result["productId"] = mysql_insert_id(&*mysql);
+            // 删除redis缓存
+            RedisConnRAII redis_conn;
+            std::string redis_key = merchantName + ":merchant_products";
+            redis_conn.send_command("DEL %s", redis_key.c_str());
         }
         else{
             result["success"] = Status::Failed;
@@ -173,6 +207,10 @@ namespace crud_api {
                 }
             }
             result["success"] = Status::Success;
+            // 删除redis缓存
+            RedisConnRAII redis_conn;
+            std::string redis_key = merchantName + ":merchant_products";
+            redis_conn.send_command("DEL %s", redis_key);
         }
         else{
             result["success"] = Status::Failed;

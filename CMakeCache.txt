@@ -26,7 +26,7 @@ CMAKE_BACKWARDS_COMPATIBILITY:STRING=2.4
 
 //Choose the type of build, options are: None Debug Release RelWithDebInfo
 // MinSizeRel ...
-CMAKE_BUILD_TYPE:STRING=
+CMAKE_BUILD_TYPE:STRING=Debug
 
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
@@ -216,11 +216,20 @@ CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 //Single output directory for building all executables.
 EXECUTABLE_OUTPUT_PATH:PATH=
 
+//Path to a file.
+HIREDIS_INCLUDE_DIR:PATH=/usr/include
+
+//Path to a library.
+HIREDIS_LIBRARIES:FILEPATH=/usr/lib/x86_64-linux-gnu/libhiredis.so
+
 //Single output directory for building all libraries.
 LIBRARY_OUTPUT_PATH:PATH=
 
 //The directory containing a CMake configuration file for MySQL.
 MySQL_DIR:PATH=MySQL_DIR-NOTFOUND
+
+//Dependencies for the target
+libwebserver_LIB_DEPENDS:STATIC=general;pthread;general;/usr/lib/x86_64-linux-gnu/libmysqlclient.so;general;/usr/lib/x86_64-linux-gnu/libhiredis.so;
 
 //Value Computed by CMake
 webserver_BINARY_DIR:STATIC=/home/bob/webserver
@@ -229,7 +238,7 @@ webserver_BINARY_DIR:STATIC=/home/bob/webserver
 webserver_IS_TOP_LEVEL:STATIC=ON
 
 //Dependencies for the target
-webserver_LIB_DEPENDS:STATIC=general;pthread;
+webserver_LIB_DEPENDS:STATIC=general;pthread;general;/usr/lib/x86_64-linux-gnu/libmysqlclient.so;general;/usr/lib/x86_64-linux-gnu/libhiredis.so;
 
 //Value Computed by CMake
 webserver_SOURCE_DIR:STATIC=/home/bob/webserver

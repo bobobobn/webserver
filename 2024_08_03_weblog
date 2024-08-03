@@ -1,0 +1,1130 @@
+2024-08-03 09:58:39.730125 [debug]: server start
+2024-08-03 09:58:39.760613 [erro]: MySQL Error
+2024-08-03 10:04:39.067592 [debug]: server start
+2024-08-03 10:04:43.400640 [info]: get a conn request
+
+2024-08-03 10:04:43.400680 [info]: m_user_count:0
+2024-08-03 10:04:43.400684 [info]: got connection of user fd:
+2024-08-03 10:04:43.400722 [erro]: accept error:errno is:11
+2024-08-03 10:04:43.400728 [info]: get client request
+
+2024-08-03 10:04:43.400972 [info]: output data to client
+
+2024-08-03 10:04:43.456211 [info]: get client request
+
+2024-08-03 10:05:15.125786 [info]: get a signal
+
+2024-08-03 10:05:15.125821 [info]: sigalarm
+2024-08-03 10:05:15.126675 [info]: get a conn request
+
+2024-08-03 10:05:15.126705 [info]: m_user_count:0
+2024-08-03 10:05:15.126711 [info]: got connection of user fd:
+2024-08-03 10:05:15.126738 [erro]: accept error:errno is:11
+2024-08-03 10:05:15.126933 [info]: get client request
+
+2024-08-03 10:05:55.929173 [info]: get a signal
+
+2024-08-03 10:05:55.929205 [info]: sigalarm
+2024-08-03 10:05:55.930751 [info]: get a conn request
+
+2024-08-03 10:05:55.930781 [info]: m_user_count:0
+2024-08-03 10:05:55.930845 [info]: got connection of user fd:
+2024-08-03 10:05:55.930892 [erro]: accept error:errno is:11
+2024-08-03 10:05:55.931120 [info]: get client request
+
+2024-08-03 10:06:33.752418 [erro]: SELECT error:
+
+2024-08-03 10:06:33.752912 [info]: get a signal
+
+2024-08-03 10:06:33.752937 [info]: sigalarm
+2024-08-03 10:06:33.754358 [info]: get a conn request
+
+2024-08-03 10:06:33.754391 [info]: m_user_count:0
+2024-08-03 10:06:33.754433 [info]: got connection of user fd:
+2024-08-03 10:06:33.754453 [erro]: accept error:errno is:11
+2024-08-03 10:06:33.754535 [info]: get client request
+
+2024-08-03 10:06:35.473075 [erro]: SELECT error:
+
+2024-08-03 10:06:35.473399 [info]: output data to client
+
+2024-08-03 10:07:24.462426 [info]: output data to client
+
+2024-08-03 10:07:24.462545 [info]: get a signal
+
+2024-08-03 10:07:24.462597 [info]: sigalarm
+2024-08-03 10:07:31.507551 [info]: get a conn request
+
+2024-08-03 10:07:31.507598 [info]: m_user_count:0
+2024-08-03 10:07:31.507604 [info]: got connection of user fd:
+2024-08-03 10:07:31.507678 [erro]: accept error:errno is:11
+2024-08-03 10:07:31.507797 [info]: get client request
+
+2024-08-03 10:07:31.507930 [info]: output data to client
+
+2024-08-03 10:07:31.563338 [info]: get client request
+
+2024-08-03 10:07:34.979432 [erro]: SELECT error:
+
+2024-08-03 10:10:29.366790 [info]: get a signal
+
+2024-08-03 10:10:29.366824 [info]: sigalarm
+2024-08-03 10:10:29.367232 [info]: get a conn request
+
+2024-08-03 10:10:29.367259 [info]: m_user_count:0
+2024-08-03 10:10:29.367291 [info]: got connection of user fd:
+2024-08-03 10:10:29.367310 [erro]: accept error:errno is:11
+2024-08-03 10:10:29.367347 [info]: get client request
+
+2024-08-03 10:11:16.850870 [info]: get a signal
+
+2024-08-03 10:11:16.850903 [info]: sigalarm
+2024-08-03 10:11:16.851721 [erro]: SELECT error:
+
+2024-08-03 10:11:16.851979 [info]: get a conn request
+
+2024-08-03 10:11:16.852007 [info]: m_user_count:0
+2024-08-03 10:11:16.852020 [info]: got connection of user fd:
+2024-08-03 10:11:16.852039 [erro]: accept error:errno is:11
+2024-08-03 10:11:18.698364 [info]: get client request
+
+2024-08-03 10:11:19.680779 [info]: output data to client
+
+2024-08-03 10:11:20.779093 [info]: output data to client
+
+2024-08-03 10:11:31.852596 [info]: get a signal
+
+2024-08-03 10:11:31.852626 [info]: sigalarm
+2024-08-03 10:11:33.736603 [info]: get a conn request
+
+2024-08-03 10:11:33.736640 [info]: m_user_count:0
+2024-08-03 10:11:33.736645 [info]: got connection of user fd:
+2024-08-03 10:11:33.736666 [erro]: accept error:errno is:11
+2024-08-03 10:11:33.736671 [info]: get client request
+
+2024-08-03 10:11:33.736766 [info]: output data to client
+
+2024-08-03 10:11:33.805110 [info]: get client request
+
+2024-08-03 10:11:45.298627 [erro]: SELECT error:
+
+2024-08-03 10:14:16.700838 [info]: get a signal
+
+2024-08-03 10:14:16.700863 [info]: sigalarm
+2024-08-03 10:14:18.142075 [info]: get a conn request
+
+2024-08-03 10:14:18.142158 [info]: m_user_count:0
+2024-08-03 10:14:18.142194 [info]: got connection of user fd:
+2024-08-03 10:14:18.142251 [erro]: accept error:errno is:11
+2024-08-03 10:14:18.142267 [info]: get client request
+
+2024-08-03 10:15:19.288366 [info]: get a signal
+
+2024-08-03 10:17:57.378721 [debug]: server start
+2024-08-03 10:19:09.075630 [debug]: server start
+2024-08-03 10:19:14.816071 [info]: get a conn request
+
+2024-08-03 10:19:14.816125 [info]: m_user_count:0
+2024-08-03 10:19:14.816200 [info]: got connection of user fd:
+2024-08-03 10:19:14.816241 [erro]: accept error:errno is:11
+2024-08-03 10:19:14.816446 [info]: get client request
+
+2024-08-03 10:19:14.816621 [info]: output data to client
+
+2024-08-03 10:19:14.876091 [info]: get client request
+
+2024-08-03 10:20:42.935410 [debug]: server start
+2024-08-03 10:21:10.991442 [info]: get a conn request
+
+2024-08-03 10:21:10.991487 [info]: m_user_count:0
+2024-08-03 10:21:10.991492 [info]: got connection of user fd:
+2024-08-03 10:21:10.991534 [erro]: accept error:errno is:11
+2024-08-03 10:21:10.991542 [info]: get client request
+
+2024-08-03 10:21:10.991775 [info]: output data to client
+
+2024-08-03 10:21:11.059524 [info]: get client request
+
+2024-08-03 10:22:24.922038 [debug]: server start
+2024-08-03 10:22:43.989820 [info]: get a conn request
+
+2024-08-03 10:22:43.989868 [info]: m_user_count:0
+2024-08-03 10:22:43.989943 [info]: got connection of user fd:
+2024-08-03 10:22:43.989987 [erro]: accept error:errno is:11
+2024-08-03 10:22:43.990301 [info]: get client request
+
+2024-08-03 10:22:43.990529 [info]: output data to client
+
+2024-08-03 10:22:44.050834 [info]: get client request
+
+2024-08-03 10:23:12.785667 [info]: get a signal
+
+2024-08-03 10:23:12.785701 [info]: sigalarm
+2024-08-03 10:23:33.427036 [debug]: server start
+2024-08-03 10:23:42.223392 [info]: get a conn request
+
+2024-08-03 10:23:42.223443 [info]: m_user_count:0
+2024-08-03 10:23:42.223505 [info]: got connection of user fd:
+2024-08-03 10:23:42.223550 [erro]: accept error:errno is:11
+2024-08-03 10:23:42.223566 [info]: get client request
+
+2024-08-03 10:23:42.223790 [info]: output data to client
+
+2024-08-03 10:23:42.281709 [info]: get client request
+
+2024-08-03 10:23:42.281987 [info]: output data to client
+
+2024-08-03 10:23:48.085920 [info]: get client request
+
+2024-08-03 10:23:48.086073 [info]: output data to client
+
+2024-08-03 10:23:48.134424 [info]: get client request
+
+2024-08-03 10:24:30.614611 [debug]: server start
+2024-08-03 10:24:36.896286 [info]: get a conn request
+
+2024-08-03 10:24:36.896340 [info]: m_user_count:0
+2024-08-03 10:24:36.896395 [info]: got connection of user fd:
+2024-08-03 10:24:36.896448 [erro]: accept error:errno is:11
+2024-08-03 10:24:36.896465 [info]: get client request
+
+2024-08-03 10:24:36.896664 [info]: output data to client
+
+2024-08-03 10:24:36.950366 [info]: get client request
+
+2024-08-03 10:24:36.950664 [info]: output data to client
+
+2024-08-03 10:24:39.950665 [info]: get client request
+
+2024-08-03 10:24:39.950776 [info]: output data to client
+
+2024-08-03 10:24:39.000474 [info]: get client request
+
+2024-08-03 10:28:09.038398 [info]: get a signal
+
+2024-08-03 10:28:09.038433 [info]: sigalarm
+2024-08-03 10:28:09.039261 [info]: get a conn request
+
+2024-08-03 10:28:09.039289 [info]: m_user_count:0
+2024-08-03 10:28:09.039295 [info]: got connection of user fd:
+2024-08-03 10:28:09.039349 [erro]: accept error:errno is:11
+2024-08-03 10:28:09.039476 [info]: get client request
+
+2024-08-03 10:28:09.039791 [info]: output data to client
+
+2024-08-03 10:33:05.176256 [debug]: server start
+2024-08-03 10:33:09.705615 [info]: get a conn request
+
+2024-08-03 10:33:09.705661 [info]: m_user_count:0
+2024-08-03 10:33:09.705666 [info]: got connection of user fd:
+2024-08-03 10:33:09.705704 [erro]: accept error:errno is:11
+2024-08-03 10:33:09.705763 [info]: get client request
+
+2024-08-03 10:33:09.706007 [info]: output data to client
+
+2024-08-03 10:33:09.760001 [info]: get client request
+
+2024-08-03 10:33:39.717140 [info]: get a signal
+
+2024-08-03 10:33:39.717166 [info]: sigalarm
+2024-08-03 10:33:39.717410 [erro]: SELECT error:
+
+2024-08-03 10:33:39.717633 [info]: get a conn request
+
+2024-08-03 10:33:39.717652 [info]: m_user_count:0
+2024-08-03 10:33:39.717656 [info]: got connection of user fd:
+2024-08-03 10:33:39.717674 [erro]: accept error:errno is:11
+2024-08-03 10:33:39.717724 [info]: get client request
+
+2024-08-03 10:33:39.718150 [erro]: SELECT error:
+
+2024-08-03 10:33:56.240389 [info]: output data to client
+
+2024-08-03 10:33:56.240443 [info]: get a signal
+
+2024-08-03 10:33:56.240451 [info]: sigalarm
+2024-08-03 10:33:56.245598 [info]: get a conn request
+
+2024-08-03 10:33:56.245623 [info]: m_user_count:0
+2024-08-03 10:33:56.245627 [info]: got connection of user fd:
+2024-08-03 10:33:56.245662 [erro]: accept error:errno is:11
+2024-08-03 10:33:56.245990 [info]: get client request
+
+2024-08-03 10:33:56.248261 [erro]: SELECT error:
+
+2024-08-03 10:33:56.248397 [info]: output data to client
+
+2024-08-03 10:34:00.827520 [info]: get client request
+
+2024-08-03 10:34:00.827691 [info]: output data to client
+
+2024-08-03 10:34:00.888360 [info]: get client request
+
+2024-08-03 10:34:00.888609 [info]: output data to client
+
+2024-08-03 10:34:00.906578 [info]: get client request
+
+2024-08-03 10:34:00.907368 [erro]: SELECT error:
+
+2024-08-03 10:34:00.907486 [info]: output data to client
+
+2024-08-03 10:34:11.245991 [info]: get a signal
+
+2024-08-03 10:34:11.246029 [info]: sigalarm
+2024-08-03 10:34:15.246255 [info]: get a signal
+
+2024-08-03 10:34:15.246296 [info]: sigalarm
+2024-08-03 10:34:38.608102 [info]: get a conn request
+
+2024-08-03 10:34:38.608153 [info]: m_user_count:0
+2024-08-03 10:34:38.608214 [info]: got connection of user fd:
+2024-08-03 10:34:38.608259 [erro]: accept error:errno is:11
+2024-08-03 10:34:38.608275 [info]: get client request
+
+2024-08-03 10:34:38.608396 [info]: output data to client
+
+2024-08-03 10:34:38.658904 [info]: get client request
+
+2024-08-03 10:34:38.659439 [erro]: SELECT error:
+
+2024-08-03 10:34:38.659629 [info]: output data to client
+
+2024-08-03 10:34:38.676259 [info]: get client request
+
+2024-08-03 10:34:38.677129 [erro]: SELECT error:
+
+2024-08-03 10:34:38.677217 [info]: output data to client
+
+2024-08-03 10:34:47.167324 [info]: get client request
+
+2024-08-03 10:34:47.167486 [info]: output data to client
+
+2024-08-03 10:34:47.225787 [info]: get client request
+
+2024-08-03 10:34:47.226033 [info]: output data to client
+
+2024-08-03 10:34:47.244726 [info]: get client request
+
+2024-08-03 10:34:47.245442 [erro]: SELECT error:
+
+2024-08-03 10:34:47.245565 [info]: output data to client
+
+2024-08-03 10:34:53.608720 [info]: get a signal
+
+2024-08-03 10:34:53.608753 [info]: sigalarm
+2024-08-03 10:35:02.609081 [info]: get a signal
+
+2024-08-03 10:35:02.609121 [info]: sigalarm
+2024-08-03 10:35:36.130113 [info]: get a conn request
+
+2024-08-03 10:35:36.130156 [info]: m_user_count:0
+2024-08-03 10:35:36.130170 [info]: got connection of user fd:
+2024-08-03 10:35:36.130192 [erro]: accept error:errno is:11
+2024-08-03 10:35:36.130238 [info]: get client request
+
+2024-08-03 10:35:36.130451 [info]: output data to client
+
+2024-08-03 10:35:36.136566 [info]: get client request
+
+2024-08-03 10:35:36.137255 [erro]: SELECT error:
+
+2024-08-03 10:35:36.137357 [info]: output data to client
+
+2024-08-03 10:35:51.130710 [info]: get a signal
+
+2024-08-03 10:35:51.130744 [info]: sigalarm
+2024-08-03 10:35:56.228160 [info]: get a conn request
+
+2024-08-03 10:35:56.228204 [info]: m_user_count:0
+2024-08-03 10:35:56.228244 [info]: got connection of user fd:
+2024-08-03 10:35:56.228266 [erro]: accept error:errno is:11
+2024-08-03 10:35:56.228371 [info]: get client request
+
+2024-08-03 10:35:56.228838 [erro]: SELECT error:
+
+2024-08-03 10:35:56.229033 [info]: output data to client
+
+2024-08-03 10:35:56.235804 [info]: get client request
+
+2024-08-03 10:35:56.236528 [erro]: SELECT error:
+
+2024-08-03 10:35:56.236626 [info]: output data to client
+
+2024-08-03 10:36:11.228838 [info]: get a signal
+
+2024-08-03 10:36:11.228872 [info]: sigalarm
+2024-08-03 10:36:12.648960 [info]: get a conn request
+
+2024-08-03 10:36:12.649007 [info]: m_user_count:0
+2024-08-03 10:36:12.649093 [info]: got connection of user fd:
+2024-08-03 10:36:12.649119 [erro]: accept error:errno is:11
+2024-08-03 10:36:12.649291 [info]: get client request
+
+2024-08-03 10:36:12.649475 [info]: output data to client
+
+2024-08-03 10:36:12.654395 [info]: get client request
+
+2024-08-03 10:36:12.655150 [erro]: SELECT error:
+
+2024-08-03 10:36:12.655270 [info]: output data to client
+
+2024-08-03 10:36:27.649384 [info]: get a signal
+
+2024-08-03 10:36:27.649420 [info]: sigalarm
+2024-08-03 10:36:39.773583 [info]: get a conn request
+
+2024-08-03 10:36:39.773640 [info]: m_user_count:0
+2024-08-03 10:36:39.773709 [info]: got connection of user fd:
+2024-08-03 10:36:39.773738 [erro]: accept error:errno is:11
+2024-08-03 10:36:39.773753 [info]: get client request
+
+2024-08-03 10:36:39.773983 [info]: output data to client
+
+2024-08-03 10:36:39.780403 [info]: get client request
+
+2024-08-03 10:36:39.824059 [erro]: SELECT error:
+
+2024-08-03 10:36:39.824226 [info]: output data to client
+
+2024-08-03 10:36:54.773971 [info]: get a signal
+
+2024-08-03 10:36:54.774004 [info]: sigalarm
+2024-08-03 10:39:49.130117 [debug]: server start
+2024-08-03 10:39:51.998170 [info]: get a conn request
+
+2024-08-03 10:39:51.998215 [info]: m_user_count:0
+2024-08-03 10:39:51.998220 [info]: got connection of user fd:
+2024-08-03 10:39:51.998260 [erro]: accept error:errno is:11
+2024-08-03 10:39:52.002887 [info]: get client request
+
+2024-08-03 10:39:52.003149 [info]: output data to client
+
+2024-08-03 10:39:52.060714 [info]: get client request
+
+2024-08-03 10:39:52.061048 [info]: output data to client
+
+2024-08-03 10:39:52.075929 [info]: get client request
+
+2024-08-03 10:39:52.076925 [erro]: SELECT error:
+
+2024-08-03 10:39:52.077304 [info]: output data to client
+
+2024-08-03 10:40:00.453375 [info]: get client request
+
+2024-08-03 10:40:00.454105 [erro]: SELECT error:
+
+2024-08-03 10:40:00.454352 [info]: output data to client
+
+2024-08-03 10:40:06.998556 [info]: get a signal
+
+2024-08-03 10:40:06.998594 [info]: sigalarm
+2024-08-03 10:40:09.991881 [info]: get client request
+
+2024-08-03 10:40:09.992563 [erro]: SELECT error:
+
+2024-08-03 10:40:09.992724 [info]: output data to client
+
+2024-08-03 10:40:15.999143 [info]: get a signal
+
+2024-08-03 10:40:15.999175 [info]: sigalarm
+2024-08-03 10:40:22.428023 [info]: get client request
+
+2024-08-03 10:40:22.428775 [erro]: SELECT error:
+
+2024-08-03 10:40:22.428993 [info]: output data to client
+
+2024-08-03 10:40:24.999672 [info]: get a signal
+
+2024-08-03 10:40:24.999704 [info]: sigalarm
+2024-08-03 10:40:37.999859 [info]: get a signal
+
+2024-08-03 10:40:37.999892 [info]: sigalarm
+2024-08-03 10:41:11.718617 [info]: get a conn request
+
+2024-08-03 10:41:11.718665 [info]: m_user_count:0
+2024-08-03 10:41:11.718738 [info]: got connection of user fd:
+2024-08-03 10:41:11.718764 [erro]: accept error:errno is:11
+2024-08-03 10:41:11.718849 [info]: get client request
+
+2024-08-03 10:42:17.406813 [debug]: server start
+2024-08-03 10:42:17.439110 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.439306 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.439425 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.439552 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.439670 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.439783 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.439893 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.440019 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.440148 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.440258 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.440370 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.440496 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.440608 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.440718 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.440814 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.440929 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.441053 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.441162 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.441298 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.441423 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.462607 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.462735 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.462867 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.463012 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.463140 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.463269 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.463398 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.463540 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.463660 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.463788 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.463914 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.464057 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.464165 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.464292 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.464409 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.464538 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.464664 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.464790 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.464920 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.465065 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.465195 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.465324 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.465436 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.465576 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.465684 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.465807 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.465916 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.466043 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.466166 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.466291 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.466423 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.466580 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.466707 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.466830 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.466953 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.467092 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.467217 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.467340 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.467467 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.467605 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.467717 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.467839 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.467962 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.468098 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.468228 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.468339 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.468462 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.468598 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.468721 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.468844 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.468968 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.469127 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.469253 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.469378 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.469517 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.469643 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.469766 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.469889 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.470025 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.470139 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.470261 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.470399 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.470535 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.470666 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.470788 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.470910 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.471044 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.471159 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.471283 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.471393 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.471532 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.471663 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.471785 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.471894 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.472029 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.472145 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.472268 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.472393 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.472529 [debug]: send_command: AUTH 
+2024-08-03 10:42:17.472644 [debug]: send_command: AUTH 
+2024-08-03 10:42:22.271920 [info]: get a conn request
+
+2024-08-03 10:42:22.271971 [info]: m_user_count:0
+2024-08-03 10:42:22.272023 [info]: got connection of user fd:
+2024-08-03 10:42:22.272062 [erro]: accept error:errno is:11
+2024-08-03 10:42:22.272183 [info]: get client request
+
+2024-08-03 10:42:22.272396 [info]: output data to client
+
+2024-08-03 10:42:22.347827 [info]: get client request
+
+2024-08-03 10:42:22.348007 [debug]: send_command: GET all_merchants_name
+2024-08-03 10:42:22.348171 [info]: output data to client
+
+2024-08-03 10:42:22.370933 [info]: get client request
+
+2024-08-03 10:42:22.371351 [debug]: send_command: GET 
+2024-08-03 10:42:41.538484 [erro]: SELECT error:
+
+2024-08-03 10:42:41.538633 [info]: get a signal
+
+2024-08-03 10:42:41.538649 [info]: sigalarm
+2024-08-03 10:42:41.538873 [debug]: send_command: SET 伊利:merchant_products {"products":[{"id":"7","name":"蒙牛纯牛奶","quantity":85},{"id":"9","name":"蒙牛纯牛奶","quantity":100}],"success":1}
+2024-08-03 10:42:41.539276 [info]: get a conn request
+
+2024-08-03 10:42:41.539296 [info]: m_user_count:0
+2024-08-03 10:42:41.539312 [info]: got connection of user fd:
+2024-08-03 10:42:41.539331 [erro]: accept error:errno is:11
+2024-08-03 10:42:41.539335 [info]: get client request
+
+2024-08-03 10:42:41.539450 [debug]: send_command: GET @
+2024-08-03 10:42:41.539836 [erro]: SELECT error:
+
+2024-08-03 10:42:41.539909 [debug]: send_command: SET 伊利:merchant_products {"products":[{"id":"7","name":"蒙牛纯牛奶","quantity":85},{"id":"9","name":"蒙牛纯牛奶","quantity":100}],"success":1}
+2024-08-03 10:42:41.540042 [info]: output data to client
+
+2024-08-03 10:42:56.539922 [info]: get a signal
+
+2024-08-03 10:42:56.539950 [info]: sigalarm
+2024-08-03 10:43:44.293125 [info]: get a conn request
+
+2024-08-03 10:43:44.293168 [info]: m_user_count:0
+2024-08-03 10:43:44.293174 [info]: got connection of user fd:
+2024-08-03 10:43:44.293195 [erro]: accept error:errno is:11
+2024-08-03 10:43:44.293834 [info]: get client request
+
+2024-08-03 10:43:44.294004 [debug]: send_command: GET �
+2024-08-03 10:44:04.797444 [info]: get a signal
+
+2024-08-03 10:44:04.797477 [info]: sigalarm
+2024-08-03 10:44:29.794487 [info]: get a conn request
+
+2024-08-03 10:44:29.794534 [info]: m_user_count:0
+2024-08-03 10:44:29.794592 [info]: got connection of user fd:
+2024-08-03 10:44:29.794616 [erro]: accept error:errno is:11
+2024-08-03 10:44:29.794630 [info]: get client request
+
+2024-08-03 10:44:33.183100 [debug]: send_command: GET 
+2024-08-03 10:44:59.805189 [debug]: server start
+2024-08-03 10:44:59.839398 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.647807 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.647927 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.648060 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.648170 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.648299 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.648437 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.648553 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.648667 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.648800 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.648892 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.649015 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.649123 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.649235 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.649359 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.649511 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.649636 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.649750 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.649872 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.649996 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.666450 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.666611 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.666723 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.666844 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.666960 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.667085 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.667197 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.667321 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.667435 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.667542 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.667700 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.667839 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.667933 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.668055 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.668159 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.668291 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.668427 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.668533 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.668631 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.668746 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.668870 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.668979 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.669089 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.669203 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.669353 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.669471 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.669585 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.669695 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.669848 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.669977 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.670086 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.670201 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.670373 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.670520 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.670683 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.670845 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.671025 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.671180 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.671340 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.671496 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.671652 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.671830 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.671981 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.672138 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.672295 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.672442 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.672592 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.672744 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.672905 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.673052 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.673197 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.673355 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.673502 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.673649 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.673805 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.673954 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.674102 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.674273 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.674432 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.674581 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.674729 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.674875 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.675026 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.675177 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.675340 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.675492 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.675629 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.675769 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.675912 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.676089 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.676232 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.676387 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.676526 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.676896 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.677050 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.677206 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.677376 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.678006 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.678132 [debug]: send_command: AUTH 
+2024-08-03 10:45:03.678256 [debug]: send_command: AUTH 
+2024-08-03 10:45:15.628904 [info]: get a conn request
+
+2024-08-03 10:45:15.628957 [info]: m_user_count:0
+2024-08-03 10:45:15.629036 [info]: got connection of user fd:
+2024-08-03 10:45:15.629081 [erro]: accept error:errno is:11
+2024-08-03 10:45:15.630348 [info]: get client request
+
+2024-08-03 10:45:15.630791 [debug]: send_command: GET 伊利:merchant_products
+2024-08-03 10:45:23.974627 [info]: output data to client
+
+2024-08-03 10:45:30.629339 [info]: get a signal
+
+2024-08-03 10:45:30.629365 [info]: sigalarm
+2024-08-03 12:07:54.347406 [info]: get a conn request
+
+2024-08-03 12:07:54.347454 [info]: m_user_count:0
+2024-08-03 12:07:54.347522 [info]: got connection of user fd:
+2024-08-03 12:07:54.347611 [erro]: accept error:errno is:11
+2024-08-03 12:07:54.347629 [info]: get client request
+
+2024-08-03 12:07:54.356048 [erro]: DELETE error:
+
+2024-08-03 12:07:54.356112 [debug]: send_command: DEL �
+2024-08-03 12:07:54.356490 [info]: output data to client
+
+2024-08-03 12:08:09.348049 [info]: get a signal
+
+2024-08-03 12:08:09.348084 [info]: sigalarm
+2024-08-03 12:08:16.730605 [info]: get a conn request
+
+2024-08-03 12:08:16.730651 [info]: m_user_count:0
+2024-08-03 12:08:16.730710 [info]: got connection of user fd:
+2024-08-03 12:08:16.730737 [erro]: accept error:errno is:11
+2024-08-03 12:08:16.730809 [info]: get client request
+
+2024-08-03 12:08:16.730999 [debug]: send_command: GET 伊利:merchant_products
+2024-08-03 12:08:16.731173 [info]: output data to client
+
+2024-08-03 12:08:31.730912 [info]: get a signal
+
+2024-08-03 12:08:31.730946 [info]: sigalarm
+2024-08-03 12:08:39.067666 [info]: get a conn request
+
+2024-08-03 12:08:39.067710 [info]: m_user_count:0
+2024-08-03 12:08:39.067775 [info]: got connection of user fd:
+2024-08-03 12:08:39.067800 [erro]: accept error:errno is:11
+2024-08-03 12:08:39.067922 [info]: get client request
+
+2024-08-03 12:08:39.068092 [debug]: send_command: GET 伊利:merchant_products
+2024-08-03 12:08:39.068256 [info]: output data to client
+
+2024-08-03 12:08:54.068331 [info]: get a signal
+
+2024-08-03 12:08:54.068366 [info]: sigalarm
+2024-08-03 12:09:08.531873 [debug]: server start
+2024-08-03 12:09:08.569175 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.569395 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.569880 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.570472 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.570986 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.571189 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.571492 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.571644 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.571777 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.571957 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.572145 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.572289 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.572424 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.572569 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.572701 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.572843 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.572986 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.573119 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.573258 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.573410 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.590590 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.590789 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.590925 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.591058 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.591199 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.591320 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.591451 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.591598 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.591725 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.591866 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.591997 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.592554 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.592695 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.592835 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.592972 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.593124 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.593253 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.593393 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.593575 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.593720 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.593851 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.593987 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.594114 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.594273 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.594408 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.594545 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.594704 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.594942 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.595089 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.595218 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.595350 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.595490 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.595629 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.595768 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.595896 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.596034 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.596173 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.596568 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.596788 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.596922 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.597062 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.597201 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.597343 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.597467 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.597606 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.597743 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.597885 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.598113 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.598263 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.598415 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.598562 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.598703 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.598840 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.598977 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.599113 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.599245 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.599446 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.599636 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.599762 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.599904 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.600040 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.600176 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.600311 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.600450 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.600589 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.600728 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.600865 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.601014 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.601151 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.601286 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.601424 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.601561 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.601693 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.601835 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.601975 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.602117 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.602271 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.602459 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.602651 [debug]: send_command: AUTH 
+2024-08-03 12:09:08.602800 [debug]: send_command: AUTH 
+2024-08-03 12:09:09.989811 [info]: get a conn request
+
+2024-08-03 12:09:09.989865 [info]: m_user_count:0
+2024-08-03 12:09:09.989928 [info]: got connection of user fd:
+2024-08-03 12:09:09.989972 [erro]: accept error:errno is:11
+2024-08-03 12:09:09.989997 [info]: get client request
+
+2024-08-03 12:09:09.990263 [info]: output data to client
+
+2024-08-03 12:09:10.061635 [info]: get client request
+
+2024-08-03 12:09:10.061789 [debug]: send_command: GET all_merchants_name
+2024-08-03 12:09:10.061962 [info]: output data to client
+
+2024-08-03 12:09:10.078141 [info]: get client request
+
+2024-08-03 12:09:10.078682 [debug]: send_command: GET 伊利:merchant_products
+2024-08-03 12:09:10.078917 [info]: output data to client
+
+2024-08-03 12:09:12.884260 [info]: get client request
+
+2024-08-03 12:09:12.884471 [info]: output data to client
+
+2024-08-03 12:09:12.933764 [info]: get client request
+
+2024-08-03 12:09:12.933933 [debug]: send_command: GET all_merchants_name
+2024-08-03 12:09:12.934070 [info]: output data to client
+
+2024-08-03 12:09:12.949108 [info]: get client request
+
+2024-08-03 12:09:12.949288 [debug]: send_command: GET 伊利:merchant_products
+2024-08-03 12:09:12.949463 [info]: output data to client
+
+2024-08-03 12:09:24.990375 [info]: get a signal
+
+2024-08-03 12:09:24.990409 [info]: sigalarm
+2024-08-03 12:09:27.153368 [info]: get client request
+
+2024-08-03 12:09:27.153532 [debug]: send_command: GET 伊利:merchant_products
+2024-08-03 12:09:27.154379 [erro]: SELECT error:
+
+2024-08-03 12:09:27.154640 [debug]: send_command: SET 伊利:merchant_products {"products":[{"id":"7","name":"蒙牛纯牛奶","quantity":85}],"success":1}
+2024-08-03 12:09:27.154749 [info]: output data to client
+
+2024-08-03 12:09:27.990644 [info]: get a signal
+
+2024-08-03 12:09:27.990668 [info]: sigalarm
+2024-08-03 12:09:29.093884 [info]: get client request
+
+2024-08-03 12:09:29.095625 [erro]: DELETE error:
+
+2024-08-03 12:09:29.095652 [debug]: send_command: DEL 伊利:merchant_products
+2024-08-03 12:09:29.095872 [info]: output data to client
+
+2024-08-03 12:09:30.975013 [info]: get client request
+
+2024-08-03 12:09:30.975183 [debug]: send_command: GET 伊利:merchant_products
+2024-08-03 12:09:30.975931 [erro]: SELECT error:
+
+2024-08-03 12:09:30.975970 [debug]: send_command: SET 伊利:merchant_products {"products":[],"success":1}
+2024-08-03 12:09:30.976150 [info]: output data to client
+
+2024-08-03 12:09:31.709496 [info]: get client request
+
+2024-08-03 12:09:31.709616 [debug]: send_command: GET 伊利:merchant_products
+2024-08-03 12:09:31.709763 [info]: output data to client
+
+2024-08-03 12:09:42.990835 [info]: get a signal
+
+2024-08-03 12:09:42.990871 [info]: sigalarm
+2024-08-03 12:09:44.194479 [info]: get client request
+
+2024-08-03 12:09:44.194631 [info]: add_product: merchantName: 伊利, productName: 伊利纯牛奶, productQuantity: 123
+
+2024-08-03 12:09:44.196666 [erro]: INSERT error:
+
+2024-08-03 12:09:44.196761 [info]: output data to client
+
+2024-08-03 12:09:46.575830 [info]: get client request
+
+2024-08-03 12:09:46.575999 [debug]: send_command: GET 伊利:merchant_products
+2024-08-03 12:09:46.576155 [info]: output data to client
+
+2024-08-03 12:09:46.991427 [info]: get a signal
+
+2024-08-03 12:09:46.991459 [info]: sigalarm
+2024-08-03 12:09:47.621266 [info]: get client request
+
+2024-08-03 12:09:47.621431 [debug]: send_command: GET 伊利:merchant_products
+2024-08-03 12:09:47.621598 [info]: output data to client
+
+2024-08-03 12:10:01.991768 [info]: get a signal
+
+2024-08-03 12:10:01.991802 [info]: sigalarm
+2024-08-03 12:10:02.991974 [info]: get a signal
+
+2024-08-03 12:10:02.992010 [info]: sigalarm
+2024-08-03 12:10:13.859978 [debug]: server start
+2024-08-03 12:10:13.888727 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.888917 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.889072 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.889314 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.889413 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.889609 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.889754 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.889933 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.890112 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.890313 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.890466 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.890694 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.890832 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.890982 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.891123 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.891289 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.891420 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.891542 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.891751 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.891922 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.922665 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.922826 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.922947 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.923073 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.923203 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.923347 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.923481 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.923630 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.923817 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.923928 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.924048 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.924206 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.924354 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.924476 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.924603 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.924725 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.924843 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.924960 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.925078 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.925220 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.925338 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.925482 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.925611 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.925720 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.925823 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.925941 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.926049 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.926180 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.926286 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.926434 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.926553 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.926685 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.926791 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.926909 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.927013 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.927150 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.927273 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.927394 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.927514 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.927647 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.927765 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.927883 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.928001 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.928134 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.928261 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.928380 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.928497 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.928628 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.928745 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.928870 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.928989 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.929123 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.929241 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.929358 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.929477 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.929609 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.929721 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.929839 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.929958 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.930079 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.930196 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.930302 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.930437 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.930560 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.930677 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.930783 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.930884 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.930988 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.931115 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.931251 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.931372 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.931483 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.931591 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.931735 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.931837 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.931943 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.932060 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.932194 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.932320 [debug]: send_command: AUTH 
+2024-08-03 12:10:13.932439 [debug]: send_command: AUTH 
+2024-08-03 12:10:20.697007 [info]: get a conn request
+
+2024-08-03 12:10:20.697073 [info]: m_user_count:0
+2024-08-03 12:10:20.697117 [info]: got connection of user fd:
+2024-08-03 12:10:20.697170 [erro]: accept error:errno is:11
+2024-08-03 12:10:20.697187 [info]: get client request
+
+2024-08-03 12:10:20.697426 [info]: output data to client
+
+2024-08-03 12:10:20.753531 [info]: get client request
+
+2024-08-03 12:10:20.753693 [debug]: send_command: GET all_merchants_name
+2024-08-03 12:10:20.753832 [info]: output data to client
+
+2024-08-03 12:10:20.771278 [info]: get client request
+
+2024-08-03 12:10:20.771664 [debug]: send_command: GET 伊利:merchant_products
+2024-08-03 12:10:20.771839 [info]: output data to client
+
+2024-08-03 12:10:21.949510 [info]: get client request
+
+2024-08-03 12:10:21.949721 [debug]: send_command: GET 伊利:merchant_products
+2024-08-03 12:10:21.949889 [info]: output data to client
+
+2024-08-03 12:10:28.324623 [info]: get client request
+
+2024-08-03 12:10:28.324854 [info]: add_product: merchantName: 伊利, productName: 纯牛奶, productQuantity: 123
+
+2024-08-03 12:10:28.326598 [erro]: INSERT error:
+
+2024-08-03 12:10:28.326638 [debug]: send_command: DEL 伊利:merchant_products
+2024-08-03 12:10:28.326886 [info]: output data to client
+
+2024-08-03 12:10:29.779738 [info]: get client request
+
+2024-08-03 12:10:29.779970 [debug]: send_command: GET 伊利:merchant_products
+2024-08-03 12:10:29.780804 [erro]: SELECT error:
+
+2024-08-03 12:10:29.781025 [debug]: send_command: SET 伊利:merchant_products {"products":[{"id":"12","name":"伊利纯牛奶","quantity":123},{"id":"13","name":"纯牛奶","quantity":123}],"success":1}
+2024-08-03 12:10:29.781141 [info]: output data to client
+
+2024-08-03 12:10:33.940281 [info]: get client request
+
+2024-08-03 12:10:33.940487 [info]: output data to client
+
+2024-08-03 12:10:33.001541 [info]: get client request
+
+2024-08-03 12:10:33.001688 [debug]: send_command: GET all_merchants_name
+2024-08-03 12:10:33.001839 [info]: output data to client
+
+2024-08-03 12:10:34.024442 [info]: get client request
+
+2024-08-03 12:10:34.024651 [debug]: send_command: GET 伊利:merchant_products
+2024-08-03 12:10:34.024838 [info]: output data to client
+
+2024-08-03 12:10:35.697566 [info]: get a signal
+
+2024-08-03 12:10:35.697601 [info]: sigalarm
+2024-08-03 12:10:42.465342 [info]: get client request
+
+2024-08-03 12:10:42.465505 [debug]: send_command: GET 伊利:merchant_products
+2024-08-03 12:10:42.465663 [info]: output data to client
+
+2024-08-03 12:10:49.698204 [info]: get a signal
+
+2024-08-03 12:10:49.698267 [info]: sigalarm
+2024-08-03 12:10:57.698724 [info]: get a signal
+
+2024-08-03 12:10:57.698757 [info]: sigalarm
