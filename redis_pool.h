@@ -39,6 +39,16 @@ public:
         va_end(args);
         return ret;
     }
+    RedisConn::ReplyPtr set(const std::string& key, const std::string& value) {
+        return conn_->set(key.c_str(), value.c_str());
+    }
+    RedisConn::ReplyPtr get(const std::string& key) {
+        return conn_->get(key.c_str());
+    }
+    RedisConn::ReplyPtr del(const std::string& key) {
+        return conn_->del(key.c_str());
+    }
+
 private:
     RedisPool* pool_;
     RedisConn* conn_;

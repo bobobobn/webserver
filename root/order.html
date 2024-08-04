@@ -37,6 +37,24 @@
     <!-- 商品管理部分 -->
     <div id="productManagement" style="display: none;">
 
+        <!-- 秒杀商品列表 -->
+        <h2>商品列表</h2>
+        <table id="killProductTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>商品名称</th>
+                    <th>库存数量</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+                    <th>抢购按钮</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 商品数据行将动态插入 -->
+            </tbody>
+        </table>
+
         <!-- 商品列表 -->
         <h2>商品列表</h2>
         <table id="productTable">
@@ -71,9 +89,11 @@
             const productTable = document.getElementById('productTable').getElementsByTagName('tbody')[0];
             const submitOrderButton = document.getElementById('submitOrder');
             const deliveryAddressInput = document.getElementById('deliveryAddress');
-
+            const killProductTable = document.getElementById('killProductTable').getElementsByTagName('tbody')[0];
+            
             let selectedMerchant = null;
             let products = [];
+            let kill_products = [];
             let merchant_of_products = null;
 
             // 加载商户列表
@@ -125,7 +145,9 @@
                     .then(data => {
                         if (data.success) {
                             products = data.products;
+                            kill_products = data.kill_products;
                             loadProducts();
+                            loadKillProducts();
                             productManagement.style.display = 'block';
                             merchant_of_products = merchantName;
                         } else {
@@ -157,6 +179,92 @@
                     orderQuantityCell.innerHTML = `<input type="number" class="order-quantity" data-id="${product.id}" value="0" min="0" max="${product.quantity}">`;
                 });
             }
+
+            function makeKillOrder(productId) {
+                console.log(`Attempting to make order for product ${productId}`);
+                fetch(`/api/orders/makeKill`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        merchantName: merchant_of_products,
+                        products: [{
+                            id: String(productId),
+                            quantity: '1'
+                        }],
+                        deliveryAddress: ''
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('订单提交成功！');
+                        // 刷新商品列表
+                        reloadProducts();
+                    } else {
+                        alert('订单提交失败，请重试。');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('订单提交失败，请重试。');
+                });
+            }
+            // 加载秒杀商品列表
+            function loadKillProducts() {
+                killProductTable.innerHTML = '';
+                kill_products.forEach(product => {
+                    const row = killProductTable.insertRow();
+                    row.insertCell(0).textContent = product.id;
+                    row.insertCell(1).textContent = product.name;
+                    row.insertCell(2).textContent = product.quantity;
+                    row.insertCell(3).textContent = product.startTime;
+                    row.insertCell(4).textContent = product.endTime;
+                    const actionsCell = row.insertCell(5);
+
+                    // 获取当前时间
+                    const currentTime = new Date().getTime();
+                    const startTime = new Date(product.startTime).getTime();
+                    const endTime = new Date(product.endTime).getTime();
+
+                    // 判断按钮的状态
+                    if (currentTime < startTime) {
+                        actionsCell.innerHTML = `<button id="kill-button-${product.id}" disabled>抢购未开始</button>`;
+                        // 设置定时器在 startTime 时启用按钮
+                        setTimeout(() => {
+                            const button = document.getElementById(`kill-button-${product.id}`);
+                            if (button) {
+                                button.disabled = false;
+                                button.textContent = '抢购';
+                                button.onclick = () => makeKillOrder(product.id);
+                            }
+                        }, startTime - currentTime);
+                    } else if (currentTime > endTime) {
+                        actionsCell.innerHTML = `<button id="kill-button-${product.id}" disabled>抢购已结束</button>`;
+                    } else {
+                        actionsCell.innerHTML = `<button id="kill-button-${product.id}">抢购</button>`;
+                        button = document.getElementById(`kill-button-${product.id}`);
+                        button.disabled = false;
+                        button.textContent = '抢购';
+                        button.onclick = () => makeKillOrder(product.id);
+                        // 设置定时器在 endTime 时禁用按钮
+                        const MAX_DELAY = 2147483647;
+                        let delay = endTime - currentTime;
+                        if (delay > MAX_DELAY) {
+                            delay = MAX_DELAY;
+                        }
+                        setTimeout( () => {
+                            const button = document.getElementById(`kill-button-${product.id}`);
+                            if (button) {
+                                button.disabled = true;
+                                button.textContent = '抢购已结束??';
+                            }
+                        }, delay);
+                    }
+
+                });
+            }
             loadMerchants();
             // 刷新商品列表
             function reloadProducts () {
@@ -173,7 +281,9 @@
                     .then(data => {
                         if (data.success) {
                             products = data.products;
+                            kill_products = data.kill_products;
                             loadProducts();
+                            loadKillProducts();
                             productManagement.style.display = 'block';
                         } else {
                             alert('加载商品失败，请重试。');
