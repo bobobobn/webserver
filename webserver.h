@@ -48,7 +48,7 @@ public:
     m_root = (char *)malloc(strlen(server_path) + strlen(root) + 1);
     strcpy(m_root, server_path);
     strcat(m_root, root);
-    m_pool = new threadPool<http_conn>(8, 10000);
+    m_pool = new threadPool<http_conn>(4, 10000);
     utils.sig_pipe = m_pipefd;
     m_OPT_LINGER = 1;
     }

@@ -18,8 +18,10 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <nlohmann/json.hpp>
 #include "lock/locker.h"
 #include "log.h"
+#include "util.h"
 
 using std::string;
 
@@ -31,7 +33,7 @@ public:
     void init(string url, string User, string PassWord, string DBName, int Port, unsigned int MaxConn);
     MYSQL* getConn();
     bool releaseConn(MYSQL* conn);
-
+    DISALLOW_COPY_MOVE_AND_ASSIGN(connectionPool);
 private:
     std::list<MYSQL*> connList;
     string m_url;
@@ -86,6 +88,50 @@ public:
         result.success = true;
         return result;
     }
+    nlohmann::json select(const string& sql, const std::vector<string>& fields,const string& key){
+        QueryResult result = query(sql);
+        nlohmann::json j;
+        if(!result.success){
+            j["error"] = result.error;
+            j["success"] = 0;
+            return j;
+        }
+        j["success"] = 1;
+        nlohmann::json data = nlohmann::json::array();
+        for(const auto& row : result.result){
+            nlohmann::json row_data;
+            for(int i = 0; i < row.size(); i++){
+                row_data[fields[i]] = row[i];
+            }
+            data.push_back(row_data);
+        }
+        j[key] = data;
+        return j;
+    }
+    nlohmann::json update_or_delete(const string& sql){
+        QueryResult result = query(sql);
+        nlohmann::json j;
+        if(!result.success){
+            j["error"] = result.error;
+            j["success"] = 0;
+            return j;
+        }
+        j["success"] = 1;        
+        return j;
+    }
+    nlohmann::json insert(const string& sql){
+        QueryResult result = query(sql);
+        nlohmann::json j;
+        if(!result.success){
+            j["error"] = result.error;
+            j["success"] = 0;
+            return j;
+        }
+        j["success"] = 1;        
+        j["productId"] = mysql_insert_id(conRAII);
+        return j;
+    }
+
     QueryResult transaction(const std::vector<string>& sqls){
         QueryResult result;
         if(mysql_query(conRAII, "START TRANSACTION") != 0){

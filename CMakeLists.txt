@@ -28,11 +28,16 @@ set(MYSQL_LIBRARIES /usr/lib/x86_64-linux-gnu/libmysqlclient.so)
 find_path(HIREDIS_INCLUDE_DIR hiredis/hiredis.h)
 find_library(HIREDIS_LIBRARIES hiredis)
 
+# 查找 gperftools 库
+find_path(GPERFTOOLS_INCLUDE_DIR gperftools/profiler.h)
+find_library(GPERFTOOLS_LIBRARIES profiler)
+
 # 包含头文件路径
 include_directories(${PROJECT_SOURCE_DIR}/locker)
 include_directories(${PROJECT_SOURCE_DIR})
 include_directories(${MYSQL_INCLUDE_DIR})
 include_directories(${HIREDIS_INCLUDE_DIR})
+include_directories(${GPERFTOOLS_INCLUDE_DIR})
 
 # 获取文件名（不带路径和扩展名）
 set(MAIN ${PROJECT_SOURCE_DIR}/main.cpp)
@@ -45,7 +50,7 @@ list(REMOVE_ITEM SRC ${MAIN})
 # 添加共享库
 add_library(${LIBRARY_NAME} SHARED ${SRC})
 target_compile_definitions(${LIBRARY_NAME} PRIVATE -DTHREADED)
-target_link_libraries(${LIBRARY_NAME} pthread Threads::Threads ${MYSQL_LIBRARIES} ${HIREDIS_LIBRARIES})
+target_link_libraries(${LIBRARY_NAME} pthread Threads::Threads ${MYSQL_LIBRARIES} ${HIREDIS_LIBRARIES} ${GPERFTOOLS_LIBRARIES})
 
 # 添加可执行文件
 add_executable(${EXAMPLE_NAME} ${MAIN})
@@ -56,4 +61,4 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 # 链接库
-target_link_libraries(${EXAMPLE_NAME} ${LIBRARY_NAME} pthread Threads::Threads ${MYSQL_LIBRARIES} ${HIREDIS_LIBRARIES})
+target_link_libraries(${EXAMPLE_NAME} ${LIBRARY_NAME} pthread Threads::Threads ${MYSQL_LIBRARIES} ${HIREDIS_LIBRARIES} ${GPERFTOOLS_LIBRARIES})

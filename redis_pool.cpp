@@ -16,17 +16,22 @@ void RedisPool::init(int max_conn, const std::string& host, int port, const std:
         pool_.push(conn);
     }
     sem_ = sem(max_conn_);
+    printf("pool has been initialized with %d connections\n", pool_.size());
 }
 
 RedisConn* RedisPool::get_conn() {
     sem_.wait();
+    locker_.lock();
     RedisConn* conn = pool_.front();
     pool_.pop();
+    locker_.unlock();
     return conn;
 }
 
 void RedisPool::release_conn(RedisConn* conn) {
+    locker_.lock();
     pool_.push(conn);
+    locker_.unlock();
     sem_.post();
 }
 

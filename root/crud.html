@@ -165,15 +165,50 @@
                     merchantSelect.appendChild(option);
                 });
                 merchant_of_products = merchants[0].name;
-                reloadProducts();
+                reloadProducts(merchant_of_products);
             }
 
             // 加载商户店铺商品
             loadMerchantButton.addEventListener('click', function () {
                 const merchantName = merchantSelect.value;
                 if (merchantName) {
+                    reloadProducts(merchantName);
+                }
+            });
+
+            // 加载商品列表
+            function loadProducts() {
+                productTable.innerHTML = '';
+                products.forEach(product => {
+                    const row = productTable.insertRow();
+                    row.insertCell(0).textContent = product.product_id;
+                    row.insertCell(1).textContent = product.product_name;
+                    row.insertCell(2).textContent = product.product_quantity;
+                    const actionsCell = row.insertCell(3);
+                    actionsCell.innerHTML = `<button onclick="editProduct(${product.product_id})">编辑</button> 
+                                             <button onclick="deleteProduct(${product.product_id})">删除</button>`;
+                });
+            }
+            // 加载秒杀商品列表
+            function loadKillProducts() {
+                killProductTable.innerHTML = '';
+                kill_products.forEach(product => {
+                    const row = killProductTable.insertRow();
+                    row.insertCell(0).textContent = product.kill_id;
+                    row.insertCell(1).textContent = product.kill_name;
+                    row.insertCell(2).textContent = product.kill_quantity;
+                    row.insertCell(3).textContent = product.start_time;
+                    row.insertCell(4).textContent = product.end_time;
+                    const actionsCell = row.insertCell(5);
+                    actionsCell.innerHTML = `<button onclick="editKillProduct(${product.kill_id})">编辑</button> 
+                                             <button onclick="deleteKillProduct(${product.kill_id})">删除</button>`;
+                });
+            }
+            // 刷新商品列表
+            function reloadProducts (merchantName) {
+                if (merchantName) {
                     // 发送商户名给服务器查询商品信息
-                    fetch(`/api/merchants/products`, {
+                    fetch(`/api/merchants/products/get`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -184,9 +219,7 @@
                     .then(data => {
                         if (data.success) {
                             products = data.products;
-                            kill_products = data.kill_products;
                             loadProducts();
-                            loadKillProducts();
                             productManagement.style.display = 'block';
                             merchant_of_products = merchantName;
                         } else {
@@ -197,56 +230,21 @@
                         console.error('Error:', error);
                         alert('加载商品失败，请重试。');
                     });
-                }
-            });
-
-            // 加载商品列表
-            function loadProducts() {
-                productTable.innerHTML = '';
-                products.forEach(product => {
-                    const row = productTable.insertRow();
-                    row.insertCell(0).textContent = product.id;
-                    row.insertCell(1).textContent = product.name;
-                    row.insertCell(2).textContent = product.quantity;
-                    const actionsCell = row.insertCell(3);
-                    actionsCell.innerHTML = `<button onclick="editProduct(${product.id})">编辑</button> 
-                                             <button onclick="deleteProduct(${product.id})">删除</button>`;
-                });
-            }
-            // 加载秒杀商品列表
-            function loadKillProducts() {
-                killProductTable.innerHTML = '';
-                kill_products.forEach(product => {
-                    const row = killProductTable.insertRow();
-                    row.insertCell(0).textContent = product.id;
-                    row.insertCell(1).textContent = product.name;
-                    row.insertCell(2).textContent = product.quantity;
-                    row.insertCell(3).textContent = product.startTime;
-                    row.insertCell(4).textContent = product.endTime;
-                    const actionsCell = row.insertCell(5);
-                    actionsCell.innerHTML = `<button onclick="editKillProduct(${product.id})">编辑</button> 
-                                             <button onclick="deleteKillProduct(${product.id})">删除</button>`;
-                });
-            }
-            // 刷新商品列表
-            function reloadProducts () {
-                if (merchant_of_products) {
                     // 发送商户名给服务器查询商品信息
-                    fetch(`/api/merchants/products`, {
+                    fetch(`/api/merchants/products/getKill`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ merchantName: merchant_of_products })
+                        body: JSON.stringify({ merchantName: merchantName })
                     })
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            products = data.products;
                             kill_products = data.kill_products;
-                            loadProducts();
                             loadKillProducts();
                             productManagement.style.display = 'block';
+                            merchant_of_products = merchantName;
                         } else {
                             alert('加载商品失败，请重试。');
                         }
@@ -262,8 +260,8 @@
                 event.preventDefault();
 
                 const newProduct = {
-                    name: addProductForm.productName.value,
-                    quantity: addProductForm.productQuantity.value
+                    product_name: addProductForm.productName.value,
+                    product_quantity: addProductForm.productQuantity.value
                 };
                 fetch(`/api/merchants/products/add`, {
                     method: 'POST',
@@ -276,7 +274,7 @@
                 .then(data => {
                     if (data.success) {
                         console.log('添加成功');
-                        newProduct.id = data.productId;
+                        newProduct.product_id = data.productId;
                         products.push(newProduct);
                         loadProducts();
                         addProductForm.reset();
@@ -295,10 +293,10 @@
                 event.preventDefault();
 
                 const newProduct = {
-                    name: addKillProductForm.killProductName.value,
-                    quantity: addKillProductForm.killProductQuantity.value,
-                    startTime: addKillProductForm.killStartTime.value,
-                    endTime: addKillProductForm.killEndTime.value
+                    kill_name: addKillProductForm.killProductName.value,
+                    kill_quantity: addKillProductForm.killProductQuantity.value,
+                    start_time: addKillProductForm.killStartTime.value,
+                    end_time: addKillProductForm.killEndTime.value
                 };
                 fetch(`/api/merchants/products/addKill`, {
                     method: 'POST',
@@ -311,7 +309,7 @@
                 .then(data => {
                     if (data.success) {
                         console.log('添加成功');
-                        newProduct.id = data.productId;
+                        newProduct.kill_id = data.productId;
                         kill_products.push(newProduct);
                         loadKillProducts();
                         addKillProductForm.reset();
@@ -327,7 +325,7 @@
 
             // 编辑产品函数
             window.editProduct = function (id) {
-                const product = products.find(p => p.id == id);
+                const product = products.find(p => p.product_id == id);
                 if (product) {
                     const newName = prompt('修改商品名称:', product.name);
                     const newQuantity = prompt('修改数量:', product.quantity);
@@ -357,7 +355,7 @@
             };
             // 编辑秒杀产品函数
             window.editKillProduct = function (id) {
-                const product = kill_products.find(p => p.id == id);
+                const product = kill_products.find(p => p.kill_id == id);
                 if (product) {
                     const newName = prompt('修改商品名称:', product.name);
                     const newQuantity = prompt('修改数量:', product.quantity);
@@ -390,7 +388,7 @@
 
             // 删除产品函数
             window.deleteProduct = function (id) {
-                const product = products.find(p => p.id == id);
+                const product = products.find(p => p.product_id == id);
                 if (product) {
                     fetch(`/api/merchants/products/delete`, {
                         method: 'POST',
@@ -403,7 +401,7 @@
                     .then(data => {
                         if (data.success) {
                             console.log('删除成功');
-                            const index = products.findIndex(p => p.id == id);
+                            const index = products.findIndex(p => p.product_id == id);
                             products.splice(index, 1);
                             loadProducts();
                         } else {
@@ -420,7 +418,7 @@
             };
             // 删除秒杀产品函数
             window.deleteKillProduct = function (id) {
-                const product = kill_products.find(p => p.id == id);
+                const product = kill_products.find(p => p.kill_id == id);
                 if (product) {
                     fetch(`/api/merchants/products/deleteKill`, {
                         method: 'POST',
@@ -433,7 +431,7 @@
                     .then(data => {
                         if (data.success) {
                             console.log('删除成功');
-                            const index = kill_products.findIndex(p => p.id == id);
+                            const index = kill_products.findIndex(p => p.kill_id == id);
                             kill_products.splice(index, 1);
                             loadKillProducts();
                         } else {

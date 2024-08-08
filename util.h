@@ -7,6 +7,8 @@
 #include <unistd.h>
 #include <cstring>
 #include <cassert>
+#include <time.h>
+#include <sys/time.h>
 
 #ifndef UTIL_H
 #define UTIL_H
@@ -20,7 +22,11 @@ public:
 public:
     static int *sig_pipe;    
 };
-
+inline int64_t gettimeofday_us() {
+    timeval now;
+    ::gettimeofday(&now, NULL);
+    return now.tv_sec * 1000000L + now.tv_usec;
+}
 //对文件描述符设置非阻塞
 int setNonBlocking(int fd);
 
@@ -31,5 +37,5 @@ void addfd(int epollfd, int fd, bool one_shot, bool ET);
 void removefd(int epollfd, int fd);
 
 void modfd(int epollfd, int fd, int ev);
-
+#define DISALLOW_COPY_MOVE_AND_ASSIGN(TypeName) TypeName(const TypeName&) = delete; TypeName(const TypeName&&) = delete;  TypeName& operator=(const TypeName&) = delete
 #endif

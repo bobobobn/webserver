@@ -233,7 +233,7 @@ bool http_conn::read_once(){
             m_read_idx += ret;
         }
     }
-    printf("%s", m_read_buff);
+    // printf("%s", m_read_buff);
     return true;
 }
 // 注册、登录、校验（占坑）

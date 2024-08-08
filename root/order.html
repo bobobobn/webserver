@@ -116,7 +116,7 @@
                             merchantSelect.appendChild(option);
                         });
                         merchant_of_products = merchants[0].name;
-                        reloadProducts(); 
+                        reloadProducts(merchant_of_products); 
                     } else {
                         alert('加载商户失败，请重试。');
                     }
@@ -134,30 +134,7 @@
             loadMerchantButton.addEventListener('click', function () {
                 const merchantName = merchantSelect.value;
                 if (merchantName) {
-                    fetch(`/api/merchants/products`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ merchantName: merchantName })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            products = data.products;
-                            kill_products = data.kill_products;
-                            loadProducts();
-                            loadKillProducts();
-                            productManagement.style.display = 'block';
-                            merchant_of_products = merchantName;
-                        } else {
-                            alert('加载商品失败，请重试。');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('加载商品失败，请重试。');
-                    });
+                    reloadProducts(merchantName);
                 }
             });
 
@@ -172,11 +149,11 @@
                     const quantityCell = row.insertCell(3);
                     const orderQuantityCell = row.insertCell(4);
 
-                    selectCell.innerHTML = `<input type="checkbox" class="select-product" data-id="${product.id}">`;
-                    idCell.textContent = product.id;
-                    nameCell.textContent = product.name;
-                    quantityCell.textContent = product.quantity;
-                    orderQuantityCell.innerHTML = `<input type="number" class="order-quantity" data-id="${product.id}" value="0" min="0" max="${product.quantity}">`;
+                    selectCell.innerHTML = `<input type="checkbox" class="select-product" data-id="${product.product_id}">`;
+                    idCell.textContent = product.product_id;
+                    nameCell.textContent = product.product_name;
+                    quantityCell.textContent = product.product_quantity;
+                    orderQuantityCell.innerHTML = `<input type="number" class="order-quantity" data-id="${product.product_id}" value="0" min="0" max="${product.quantity}">`;
                 });
             }
 
@@ -201,7 +178,7 @@
                     if (data.success) {
                         alert('订单提交成功！');
                         // 刷新商品列表
-                        reloadProducts();
+                        reloadProducts(merchant_of_products);
                     } else {
                         alert('订单提交失败，请重试。');
                     }
@@ -216,38 +193,38 @@
                 killProductTable.innerHTML = '';
                 kill_products.forEach(product => {
                     const row = killProductTable.insertRow();
-                    row.insertCell(0).textContent = product.id;
-                    row.insertCell(1).textContent = product.name;
-                    row.insertCell(2).textContent = product.quantity;
-                    row.insertCell(3).textContent = product.startTime;
-                    row.insertCell(4).textContent = product.endTime;
+                    row.insertCell(0).textContent = product.kill_id;
+                    row.insertCell(1).textContent = product.kill_name;
+                    row.insertCell(2).textContent = product.kill_quantity;
+                    row.insertCell(3).textContent = product.start_time;
+                    row.insertCell(4).textContent = product.end_time;
                     const actionsCell = row.insertCell(5);
 
                     // 获取当前时间
                     const currentTime = new Date().getTime();
-                    const startTime = new Date(product.startTime).getTime();
-                    const endTime = new Date(product.endTime).getTime();
+                    const startTime = new Date(product.start_time).getTime();
+                    const endTime = new Date(product.end_time).getTime();
 
                     // 判断按钮的状态
                     if (currentTime < startTime) {
-                        actionsCell.innerHTML = `<button id="kill-button-${product.id}" disabled>抢购未开始</button>`;
+                        actionsCell.innerHTML = `<button id="kill-button-${product.kill_id}" disabled>抢购未开始</button>`;
                         // 设置定时器在 startTime 时启用按钮
                         setTimeout(() => {
-                            const button = document.getElementById(`kill-button-${product.id}`);
+                            const button = document.getElementById(`kill-button-${product.kill_id}`);
                             if (button) {
                                 button.disabled = false;
                                 button.textContent = '抢购';
-                                button.onclick = () => makeKillOrder(product.id);
+                                button.onclick = () => makeKillOrder(product.kill_id);
                             }
                         }, startTime - currentTime);
                     } else if (currentTime > endTime) {
-                        actionsCell.innerHTML = `<button id="kill-button-${product.id}" disabled>抢购已结束</button>`;
+                        actionsCell.innerHTML = `<button id="kill-button-${product.kill_id}" disabled>抢购已结束</button>`;
                     } else {
-                        actionsCell.innerHTML = `<button id="kill-button-${product.id}">抢购</button>`;
-                        button = document.getElementById(`kill-button-${product.id}`);
+                        actionsCell.innerHTML = `<button id="kill-button-${product.kill_id}">抢购</button>`;
+                        button = document.getElementById(`kill-button-${product.kill_id}`);
                         button.disabled = false;
                         button.textContent = '抢购';
-                        button.onclick = () => makeKillOrder(product.id);
+                        button.onclick = () => makeKillOrder(product.kill_id);
                         // 设置定时器在 endTime 时禁用按钮
                         const MAX_DELAY = 2147483647;
                         let delay = endTime - currentTime;
@@ -255,7 +232,7 @@
                             delay = MAX_DELAY;
                         }
                         setTimeout( () => {
-                            const button = document.getElementById(`kill-button-${product.id}`);
+                            const button = document.getElementById(`kill-button-${product.kill_id}`);
                             if (button) {
                                 button.disabled = true;
                                 button.textContent = '抢购已结束??';
@@ -267,24 +244,46 @@
             }
             loadMerchants();
             // 刷新商品列表
-            function reloadProducts () {
-                if (merchant_of_products) {
+            function reloadProducts (merchantName) {
+                if (merchantName) {
                     // 发送商户名给服务器查询商品信息
-                    fetch(`/api/merchants/products`, {
+                    fetch(`/api/merchants/products/get`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ merchantName: merchant_of_products })
+                        body: JSON.stringify({ merchantName: merchantName })
                     })
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
                             products = data.products;
-                            kill_products = data.kill_products;
                             loadProducts();
+                            productManagement.style.display = 'block';
+                            merchant_of_products = merchantName;
+                        } else {
+                            alert('加载商品失败，请重试。');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('加载商品失败，请重试。');
+                    });
+                    // 发送商户名给服务器查询商品信息
+                    fetch(`/api/merchants/products/getKill`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ merchantName: merchantName })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            kill_products = data.kill_products;
                             loadKillProducts();
                             productManagement.style.display = 'block';
+                            merchant_of_products = merchantName;
                         } else {
                             alert('加载商品失败，请重试。');
                         }
@@ -338,7 +337,7 @@
                             });
                             deliveryAddressInput.value = '';
                             // 刷新商品列表
-                            reloadProducts();
+                            reloadProducts(merchant_of_products);
                         } else {
                             alert('订单提交失败，请重试。');
                         }
