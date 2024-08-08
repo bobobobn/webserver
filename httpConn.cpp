@@ -1,6 +1,7 @@
 #include "httpConn.h"
 #include <cstdio>
 #include "util.h"
+#include "crud_api.h"
 
 const char *ok_200_title = "OK";
 const char *error_400_title = "Bad Request";
@@ -22,8 +23,8 @@ void http_conn::initmysql_result(connectionPool *connPool)
     //先从连接池中取一个连接
     MYSQL *mysql = NULL;
     this->conn_pool = connPool;
-    connectionRAII mysqlcon(&mysql, connPool);
-
+    connectionRAII mysqlcon;
+    mysql = &*mysqlcon;
     //在user表中检索username，passwd数据，浏览器端输入
     if (mysql_query(mysql, "SELECT username,passwd FROM user"))
     {
@@ -232,7 +233,7 @@ bool http_conn::read_once(){
             m_read_idx += ret;
         }
     }
-    printf("%s", m_read_buff);
+    // printf("%s", m_read_buff);
     return true;
 }
 // 注册、登录、校验（占坑）
@@ -244,9 +245,19 @@ http_conn::HTTP_CODE http_conn::do_request(){
     int len = strlen(doc_root);
     //printf("m_url:%s\n", m_url);
     const char *p = strrchr(m_url, '/');
-
-    
-    if ((*(p + 1) == '2' || *(p + 1) == '3'))
+    printf("url:%s\n", m_url);
+    auto api_func = crud_api::api_map.find(std::string(m_url));
+    if (api_func!= crud_api::api_map.end())
+    {
+        auto result_content = (api_func->second)(m_string, m_string ? strlen(m_string) : 0);
+        // printf("api_func:%s\n", result_content.c_str());
+        add_status_line(200, ok_200_title);
+        add_response("Content-Type: application/json\r\n");
+        add_head(result_content.length());
+        add_content(result_content.c_str());
+        return API_REQUEST;
+    }
+    else if ((*(p + 1) == '2' || *(p + 1) == '3'))
     {
 
         //根据标志判断是登录检测还是注册检测
@@ -286,7 +297,8 @@ http_conn::HTTP_CODE http_conn::do_request(){
             if (m_users.find(name) == m_users.end())
             {
                 m_lock.lock();
-                connectionRAII mysqlcon(&mysql, conn_pool);
+                connectionRAII mysqlcon;
+                mysql = &*mysqlcon;
                 int res = mysql_query(mysql, sql_insert);
                 m_users.insert(std::pair<std::string, std::string>(name, password));
                 m_lock.unlock();
@@ -310,7 +322,7 @@ http_conn::HTTP_CODE http_conn::do_request(){
         }
     }
 
-    if (*(p + 1) == '0')
+    else if (*(p + 1) == '0')
     {
         char *m_url_real = (char *)malloc(sizeof(char) * 200);
         strcpy(m_url_real, "/register.html");
@@ -346,6 +358,22 @@ http_conn::HTTP_CODE http_conn::do_request(){
     {
         char *m_url_real = (char *)malloc(sizeof(char) * 200);
         strcpy(m_url_real, "/fans.html");
+        strncpy(m_real_file + len, m_url_real, strlen(m_url_real));
+
+        free(m_url_real);
+    }
+    else if (*(p + 1) == 'c')
+    {
+        char *m_url_real = (char *)malloc(sizeof(char) * 200);
+        strcpy(m_url_real, "/crud.html");
+        strncpy(m_real_file + len, m_url_real, strlen(m_url_real));
+
+        free(m_url_real);
+    }
+    else if (*(p + 1) == 'o')
+    {
+        char *m_url_real = (char *)malloc(sizeof(char) * 200);
+        strcpy(m_url_real, "/order.html");
         strncpy(m_real_file + len, m_url_real, strlen(m_url_real));
 
         free(m_url_real);
@@ -436,6 +464,9 @@ bool http_conn::process_write(HTTP_CODE ret){
                 m_bytes_to_send = m_write_idx;
                 break;
             }
+        }
+        case(API_REQUEST):{
+            break;
         }
         default:
             return false;

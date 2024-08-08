@@ -19,6 +19,7 @@
 #include "heapTimer.h"
 #include "log.h"
 #include "connectionPool.h"
+#include "redis_pool.h"
 #include <string>
 using std::string;
 
@@ -28,7 +29,7 @@ const int TIMESLOT = 5;             //最小超时单位
 
 class WebServer{
 public:
-    WebServer(int port, time_t delay, string user, string password, string dbName):m_port(port), m_delay(delay){
+    WebServer(int port, time_t delay, string user, string password, string dbName, string redisIp, int redisPort, string redisPassword):m_port(port), m_delay(delay){
     users = new http_conn[MAX_FD];
     timers = new timer[MAX_FD];
     m_heap = new timerHeap(MAX_FD);
@@ -37,6 +38,8 @@ public:
 
     m_connPool = connectionPool::get_instance();
     connectionPool::get_instance()->init("localhost", user, password, "websvDB", 3306, 100);
+    m_redis_pool = RedisPool::get_instance();
+    m_redis_pool->init(100, redisIp, redisPort, redisPassword);
     users->initmysql_result(m_connPool);
     //root文件夹路径
     char server_path[200];
@@ -45,7 +48,7 @@ public:
     m_root = (char *)malloc(strlen(server_path) + strlen(root) + 1);
     strcpy(m_root, server_path);
     strcat(m_root, root);
-    m_pool = new threadPool<http_conn>(8, 10000);
+    m_pool = new threadPool<http_conn>(4, 10000);
     utils.sig_pipe = m_pipefd;
     m_OPT_LINGER = 1;
     }
@@ -76,6 +79,7 @@ public:
 
 public:
     connectionPool *m_connPool;
+    RedisPool * m_redis_pool;
     //基础
     int m_port;
     char *m_root;

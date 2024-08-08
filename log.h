@@ -72,7 +72,7 @@ public:
         return &instance;
     }
     bool init(char* file_name, int log_buff_size, int max_lines, int max_queue_size){
-        
+        m_level = 0;
         memset(m_file_name, '\0', 100);
         memset(m_dir_name, '\0', 100);
         const char* p = strrchr(file_name, '/');
@@ -109,6 +109,9 @@ public:
         
     }
     bool write_log(int level, const char* format, ...){
+        if(level < m_level){
+            return false;
+        }
         struct timeval now = {0, 0};
         gettimeofday(&now, NULL);
         time_t t = time(NULL);
@@ -171,6 +174,9 @@ public:
     static void* flush_write_log(void* args){
         Log::get_instance()->async_write();
     }
+    void set_level(int level){
+        m_level = level;
+    }
 
 
 private:
@@ -199,8 +205,7 @@ private:
             fclose(m_file);
         delete m_queue;
     };
-
-    
+    int m_level;    
 };
 
 
